@@ -1,0 +1,214 @@
+.header {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+  }
+}
+
+.logo {
+  flex-shrink: 0;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e5a96;
+    letter-spacing: 2px;
+
+    &::before {
+      content: '⬟ ';
+      color: #d32f2f;
+      margin-right: 8px;
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+  margin: 0 40px;
+
+  .nav-item-wrapper {
+    position: relative;
+
+    .nav-item {
+      text-decoration: none;
+      color: #333;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 8px 0;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: #1e5a96;
+      }
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.2s ease;
+      margin-top: 8px;
+      padding: 12px 0;
+      z-index: 1001;
+
+      &.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-item-wrapper {
+        position: relative;
+
+        .dropdown-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 3px 20px;
+          color: #333;
+          text-decoration: none;
+          font-size: 13px;
+          font-weight: 500;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: #f5f5f5;
+            color: #1e5a96;
+          }
+
+          &.has-submenu {
+            .chevron {
+              margin-left: auto;
+              transition: transform 0.2s ease;
+            }
+
+            &:hover .chevron {
+              transform: translateX(4px);
+            }
+          }
+        }
+
+        /* Nested Submenu */
+        .submenu {
+          position: absolute;
+          top: 0;
+          left: 100%;
+          background: white;
+          border-radius: 4px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          min-width: 180px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateX(-8px);
+          transition: all 0.2s ease;
+          margin-left: 8px;
+          padding: 12px 0;
+          z-index: 1002;
+
+          &.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+          }
+
+          .submenu-item {
+            display: block;
+            padding: 3px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: #f5f5f5;
+              color: #1e5a96;
+              padding-left: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.cta-button {
+  flex-shrink: 0;
+  background-color: #1e5a96;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  display: inline-block;
+
+  &:hover {
+    background-color: #154280;
+    box-shadow: 0 4px 12px rgba(30, 90, 150, 0.3);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .header .header-container {
+    height: 70px;
+  }
+
+  .nav {
+    gap: 15px;
+    margin: 0 20px;
+
+    .nav-item {
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header .header-container {
+    height: 60px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .logo .logo-text {
+    font-size: 18px;
+  }
+
+  .cta-button {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,122 @@
+.how-we-work {
+  width: 100%;
+  background: #ffffff;
+  padding: 70px 0;
+}
+
+.how-we-work__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.how-we-work__left {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.how-we-work__image {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=2000&h=1200&dpr=1')
+    center/cover no-repeat;
+  opacity: 0.14;
+  filter: grayscale(100%);
+}
+
+.how-we-work__headline {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 0px;
+  align-items: end;
+}
+
+.how-we-work__how {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  font-size: clamp(52px, 6vw, 92px);
+  line-height: 0.95;
+  font-weight: 800;
+  color: #0b3d7a;
+}
+
+.how-we-work__we {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  font-size: clamp(78px, 8.5vw, 140px);
+  line-height: 0.9;
+  font-weight: 900;
+  color: #d71920;
+}
+
+.how-we-work__work {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  font-size: clamp(64px, 7vw, 120px);
+  line-height: 0.9;
+  font-weight: 900;
+  color: #0b3d7a;
+  align-self: end;
+}
+
+.how-we-work__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 38px;
+}
+
+.how-we-work__item {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.how-we-work__icon {
+  width: 36px;
+  height: 36px;
+  color: #0f3f78;
+}
+
+.how-we-work__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.how-we-work__text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #1f1f1f;
+  font-weight: 500;
+}
+
+@media (max-width: 1000px) {
+  .how-we-work__container {
+    grid-template-columns: 1fr;
+  }
+
+  .how-we-work__left {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .how-we-work__list {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
