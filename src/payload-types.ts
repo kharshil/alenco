@@ -69,6 +69,10 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    categories: Category;
+    subcategories: Subcategory;
+    'product-groups': ProductGroup;
+    products: Product;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +82,10 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    subcategories: SubcategoriesSelect<false> | SubcategoriesSelect<true>;
+    'product-groups': ProductGroupsSelect<false> | ProductGroupsSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -161,6 +169,314 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  name: string;
+  /**
+   * URL-friendly identifier (e.g., aluminium-window-door-hardware)
+   */
+  slug: string;
+  /**
+   * Detailed description shown on the category page
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Brief description for category cards on homepage
+   */
+  shortDescription?: string | null;
+  image: string | Media;
+  /**
+   * Large banner image shown at the top of the category page
+   */
+  bannerImage?: (string | null) | Media;
+  /**
+   * Show this category on the homepage
+   */
+  featured?: boolean | null;
+  /**
+   * Lower numbers appear first
+   */
+  order?: number | null;
+  /**
+   * Steps involved in product customization (shown on category page)
+   */
+  productionProcedure?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * General technical specifications for this category
+   */
+  technicalSpecifications?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Reasons to choose this category of products
+   */
+  whyChooseUs?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    metaKeywords?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories".
+ */
+export interface Subcategory {
+  id: string;
+  /**
+   * e.g., HIVIK - CREMONE HANDLES FINISH, 27MM NON-EURO SERIES SLIDING WINDOW
+   */
+  name: string;
+  /**
+   * URL-friendly identifier
+   */
+  slug: string;
+  /**
+   * The main category this subcategory belongs to
+   */
+  category: string | Category;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Brief description for subcategory cards
+   */
+  shortDescription?: string | null;
+  image: string | Media;
+  /**
+   * Large banner image shown at the top of the subcategory page
+   */
+  bannerImage?: (string | null) | Media;
+  /**
+   * Lower numbers appear first
+   */
+  order?: number | null;
+  /**
+   * Show this subcategory prominently in listings
+   */
+  featured?: boolean | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    metaKeywords?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-groups".
+ */
+export interface ProductGroup {
+  id: string;
+  /**
+   * e.g., HIVIK MULTI LOCKING
+   */
+  name: string;
+  /**
+   * URL-friendly identifier
+   */
+  slug: string;
+  /**
+   * The subcategory this product group belongs to
+   */
+  subcategory: string | Subcategory;
+  description?: string | null;
+  image?: (string | null) | Media;
+  /**
+   * Lower numbers appear first
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  /**
+   * e.g., HIVIK-1 CREMONE HANDLE CROME FINISH
+   */
+  name: string;
+  /**
+   * URL-friendly identifier
+   */
+  slug: string;
+  /**
+   * Unique product identifier (e.g., PH131CP)
+   */
+  productCode: string;
+  /**
+   * The subcategory this product belongs to
+   */
+  subcategory: string | Subcategory;
+  /**
+   * Optional grouping within the subcategory (e.g., HIVIK MULTI LOCKING)
+   */
+  productGroup?: (string | null) | ProductGroup;
+  /**
+   * Add multiple images for the product carousel
+   */
+  images: {
+    image: string | Media;
+    caption?: string | null;
+    id?: string | null;
+  }[];
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Brief description for product cards
+   */
+  shortDescription?: string | null;
+  /**
+   * List of technical features and specifications
+   */
+  technicalSpecifications?:
+    | {
+        /**
+         * e.g., Fork Driven Multiple, Locking System
+         */
+        specification: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Key-value pairs for detailed specifications
+   */
+  detailedSpecifications?:
+    | {
+        /**
+         * e.g., Material, Weight, Dimensions
+         */
+        key: string;
+        /**
+         * e.g., Stainless Steel, 500g, 10x5x2 cm
+         */
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * List of available finishes for this product
+   */
+  finishes?:
+    | {
+        /**
+         * e.g., Gold, Chrome, Satin Silver, SS, Bronze
+         */
+        finish: string;
+        image?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Show this product prominently in listings
+   */
+  featured?: boolean | null;
+  /**
+   * Lower numbers appear first
+   */
+  order?: number | null;
+  status?: ('active' | 'inactive' | 'out-of-stock' | 'coming-soon') | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    metaKeywords?: string | null;
+  };
+  /**
+   * Products to show in the related products section
+   */
+  relatedProducts?: (string | Product)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -190,6 +506,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'subcategories';
+        value: string | Subcategory;
+      } | null)
+    | ({
+        relationTo: 'product-groups';
+        value: string | ProductGroup;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: string | Product;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -272,6 +604,123 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  shortDescription?: T;
+  image?: T;
+  bannerImage?: T;
+  featured?: T;
+  order?: T;
+  productionProcedure?: T;
+  technicalSpecifications?: T;
+  whyChooseUs?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        metaKeywords?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories_select".
+ */
+export interface SubcategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  category?: T;
+  description?: T;
+  shortDescription?: T;
+  image?: T;
+  bannerImage?: T;
+  order?: T;
+  featured?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        metaKeywords?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-groups_select".
+ */
+export interface ProductGroupsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  subcategory?: T;
+  description?: T;
+  image?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  productCode?: T;
+  subcategory?: T;
+  productGroup?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  description?: T;
+  shortDescription?: T;
+  technicalSpecifications?:
+    | T
+    | {
+        specification?: T;
+        id?: T;
+      };
+  detailedSpecifications?:
+    | T
+    | {
+        key?: T;
+        value?: T;
+        id?: T;
+      };
+  finishes?:
+    | T
+    | {
+        finish?: T;
+        image?: T;
+        id?: T;
+      };
+  featured?: T;
+  order?: T;
+  status?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        metaKeywords?: T;
+      };
+  relatedProducts?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
