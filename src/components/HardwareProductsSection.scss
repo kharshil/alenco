@@ -1,39 +1,74 @@
+// Alenco Green Color Palette (from brochure)
+$primary-green: #4CAF50;
+$primary-green-dark: #388E3C;
+$primary-green-light: #66BB6A;
+$text-dark: #1a1a1a;
+$text-gray: #666;
+
 .hardware-products {
   width: 100%;
-  background: #fff;
-  padding: 56px 0;
+  background: #f8f9fa;
+  padding: 80px 0;
 }
 
 .hardware-products__container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 .hardware-products__title {
-  margin: 0 0 28px;
+  margin: 0 0 12px;
   text-align: center;
-  font-size: 28px;
-  font-weight: 500;
-  color: #111;
+  font-size: 42px;
+  font-weight: 600;
+  color: $text-dark;
+  letter-spacing: -0.5px;
+}
+
+.hardware-products__subtitle {
+  margin: 0 0 48px;
+  text-align: center;
+  font-size: 18px;
+  color: $text-gray;
+  font-weight: 400;
 }
 
 .hardware-products__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+  gap: 24px;
 }
 
 .hardware-products__card {
+  text-decoration: none;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.hardware-products__article {
   margin: 0;
 }
 
 .hardware-products__media {
   position: relative;
-  border-radius: 2px;
+  border-radius: 12px;
   overflow: hidden;
-  background: #eee;
-  aspect-ratio: 16 / 7;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  aspect-ratio: 16 / 9;
+}
+
+.hardware-products__placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
 }
 
 .hardware-products__image {
@@ -43,47 +78,154 @@
   height: 100%;
   object-fit: cover;
   transform: scale(1.01);
-  transition: transform 200ms ease;
+  transition: transform 0.5s ease;
 }
 
-.hardware-products__media:hover .hardware-products__image {
-  transform: scale(1.04);
+.hardware-products__card:hover .hardware-products__image {
+  transform: scale(1.08);
+}
+
+.hardware-products__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    transparent 70%
+  );
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.hardware-products__card:hover .hardware-products__overlay {
+  opacity: 0.85;
 }
 
 .hardware-products__ribbon {
   position: absolute;
   left: 0;
   bottom: 0;
-  background: linear-gradient(90deg, rgba(215, 25, 32, 0.95), rgba(215, 25, 32, 0.78));
-  padding: 10px 37px 10px 20px;
-  -webkit-clip-path: polygon(0% 0, 88% 0, 100% 100%, 0% 100%);
-  clip-path: polygon(0% 0, 88% 0, 100% 100%, 0% 100%);
-  max-width: 280px;
-  max-height: 74px;
-  width: 100%;
-  display: table;
-  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba($primary-green, 0.95) 0%,
+    rgba($primary-green-dark, 0.9) 100%
+  );
+  padding: 14px 48px 14px 24px;
+  clip-path: polygon(0% 0, 85% 0, 100% 100%, 0% 100%);
+  max-width: 320px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  transition: max-width 0.3s ease, background 0.3s ease;
+}
+
+.hardware-products__card:hover .hardware-products__ribbon {
+  max-width: 360px;
+  background: linear-gradient(
+    135deg,
+    rgba($primary-green-dark, 0.98) 0%,
+    rgba(darken($primary-green-dark, 8%), 0.95) 100%
+  );
 }
 
 .hardware-products__ribbonText {
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
-  font-weight: 400;
-  display: table-cell;
-  vertical-align: middle;
+  font-weight: 500;
+  line-height: 1.3;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.hardware-products__arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $primary-green;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hardware-products__card:hover .hardware-products__arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hardware-products__arrow svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 1024px) {
+  .hardware-products__title {
+    font-size: 36px;
+  }
+
+  .hardware-products__subtitle {
+    font-size: 16px;
+    margin-bottom: 36px;
+  }
 }
 
 @media (max-width: 900px) {
+  .hardware-products {
+    padding: 60px 0;
+  }
+
   .hardware-products__grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .hardware-products__media {
-    aspect-ratio: 16 / 8;
+    aspect-ratio: 16 / 10;
   }
 
   .hardware-products__ribbon {
-    width: 70%;
+    max-width: 75%;
+    padding: 12px 40px 12px 20px;
+  }
+
+  .hardware-products__ribbonText {
+    font-size: 16px;
+  }
+
+  .hardware-products__arrow {
+    width: 42px;
+    height: 42px;
+    right: 16px;
+    bottom: 16px;
   }
 }
 
+@media (max-width: 600px) {
+  .hardware-products {
+    padding: 48px 0;
+  }
+
+  .hardware-products__container {
+    padding: 0 16px;
+  }
+
+  .hardware-products__title {
+    font-size: 28px;
+  }
+
+  .hardware-products__subtitle {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .hardware-products__ribbon {
+    max-width: 85%;
+  }
+}
