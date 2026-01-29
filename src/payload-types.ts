@@ -73,6 +73,7 @@ export interface Config {
     subcategories: Subcategory;
     'product-groups': ProductGroup;
     products: Product;
+    distributors: Distributor;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     subcategories: SubcategoriesSelect<false> | SubcategoriesSelect<true>;
     'product-groups': ProductGroupsSelect<false> | ProductGroupsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    distributors: DistributorsSelect<false> | DistributorsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -477,6 +479,28 @@ export interface Product {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "distributors".
+ */
+export interface Distributor {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  city: string;
+  message: string;
+  /**
+   * Track the status of this inquiry
+   */
+  status?: ('new' | 'contacted' | 'in-progress' | 'approved' | 'rejected') | null;
+  /**
+   * Internal notes about this inquiry
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -522,6 +546,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: string | Product;
+      } | null)
+    | ({
+        relationTo: 'distributors';
+        value: string | Distributor;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -719,6 +747,21 @@ export interface ProductsSelect<T extends boolean = true> {
         metaKeywords?: T;
       };
   relatedProducts?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "distributors_select".
+ */
+export interface DistributorsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  city?: T;
+  message?: T;
+  status?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }
