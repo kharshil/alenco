@@ -24,26 +24,22 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({
   companyName = "Alenco Sales",
   tagline = "SINCE 1982",
-  email = "info@alencosales.in",
+  email = "alencou9@gmail.com",
   phone = [
-    "+91 28123 88515",
-    "+91 99987 40409",
-    "+91 99987 40402",
-    "+91 99987 40403"
+    "+91 7069094255",
   ],
   address = [
-    "5-BHUMI INDUSTRIAL ESTATE,",
-    "OPP. ASHOK LEYLAND SHOWROOM,",
-    "RAJKOT-GONDAL HIGHWAY NH-27,",
-    "KOTHARIYA, RAJKOT-360 004, (GUJ.)",
+    "Plot No. 40, SRS Industrial Park,",
+    " N.H. No. 8, Beside Darshan Hotel, Ankhi,",
+    "Por, Vadodara – 391243. (GUJ.)",
     "INDIA"
   ],
   socialLinks = {
-    facebook: "#",
-    twitter: "#",
-    instagram: "#",
-    pinterest: "#",
-    linkedin: "#"
+    facebook: "",
+    twitter: "",
+    instagram: "",
+    pinterest: "",
+    linkedin: ""
   }
 }) => {
   const currentYear = new Date().getFullYear();
@@ -196,12 +192,12 @@ const Footer: React.FC<FooterProps> = ({
       <div className="footer-bottom">
         <div className="footer-container">
           <div className="bottom-content">
-            <p className="copyright">
+            <p className="copyright" style={{textAlign:"center"}}>
               Copyright {currentYear} All Rights Reserved by {companyName} Hardware
             </p>
-            <div className="credits">
+            {/* <div className="credits">
               Powered by <a href="https://skywebtech.com" target="_blank" rel="noopener noreferrer" className="credits-link">SkyWebTech</a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
