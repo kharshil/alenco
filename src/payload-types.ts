@@ -282,7 +282,7 @@ export interface Category {
 export interface Subcategory {
   id: string;
   /**
-   * e.g., HIVIK - CREMONE HANDLES FINISH, 27MM NON-EURO SERIES SLIDING WINDOW
+   * e.g., ALENCO - CREMONE HANDLES FINISH, 27MM NON-EURO SERIES SLIDING WINDOW
    */
   name: string;
   /**
@@ -340,7 +340,7 @@ export interface Subcategory {
 export interface ProductGroup {
   id: string;
   /**
-   * e.g., HIVIK MULTI LOCKING
+   * e.g., ALENCO MULTI LOCKING
    */
   name: string;
   /**
@@ -367,7 +367,7 @@ export interface ProductGroup {
 export interface Product {
   id: string;
   /**
-   * e.g., HIVIK-1 CREMONE HANDLE CROME FINISH
+   * e.g., ALENCO-1 CREMONE HANDLE CROME FINISH
    */
   name: string;
   /**
@@ -383,7 +383,7 @@ export interface Product {
    */
   subcategory: string | Subcategory;
   /**
-   * Optional grouping within the subcategory (e.g., HIVIK MULTI LOCKING)
+   * Optional grouping within the subcategory (e.g., ALENCO MULTI LOCKING)
    */
   productGroup?: (string | null) | ProductGroup;
   /**

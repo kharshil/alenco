@@ -18,8 +18,8 @@ interface FeaturesSectionProps {
 }
 
 const FeaturesSection: React.FC<FeaturesSectionProps> = ({
-  title = "Features of Hivik Hardware Products",
-  subtitle = "If you want to grab any of our door and window hardware & accessories, we welcome you! Book a consultation with our experts and share your requirements. HIVIK hardware offers you new and creative patterns as it has a wide reach for entryway hardware and embellishments.",
+  title = "Features of Alenco Hardware Products",
+  subtitle = "If you want to grab any of our door and window hardware & accessories, we welcome you! Book a consultation with our experts and share your requirements. Alenco hardware offers you new and creative patterns as it has a wide reach for entryway hardware and embellishments.",
   features = [
     {
       id: 1,
@@ -91,7 +91,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({
           
           <h2 className="feat-heading">
             <span className="heading-primary">Why Choose</span>
-            <span className="heading-accent">Hivik Hardware</span>
+            <span className="heading-accent">Alenco Hardware</span>
           </h2>
           
           <p className="feat-intro">{subtitle}</p>

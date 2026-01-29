@@ -21,7 +21,7 @@ export const Products: CollectionConfig = {
       required: true,
       label: 'Product Name',
       admin: {
-        description: 'e.g., HIVIK-1 CREMONE HANDLE CROME FINISH',
+        description: 'e.g., ALENCO-1 CREMONE HANDLE CROME FINISH',
       },
     },
     {
@@ -71,7 +71,7 @@ export const Products: CollectionConfig = {
       relationTo: 'product-groups',
       label: 'Product Group',
       admin: {
-        description: 'Optional grouping within the subcategory (e.g., HIVIK MULTI LOCKING)',
+        description: 'Optional grouping within the subcategory (e.g., ALENCO MULTI LOCKING)',
       },
     },
     {

@@ -19,13 +19,13 @@ interface ServicesSectionProps {
 }
 
 const ServicesSection: React.FC<ServicesSectionProps> = ({
-  title = "Services of Pooja Sales - Window Hardware Accessories Manufacturers in Rajkot",
+  title = "Services of Alenco - Window Hardware Accessories Manufacturers in Rajkot",
   subtitle = "The company offers services worldwide. Our brand is just a few steps away from reaching a significant milestone, and if you want to be a part of it, contact us immediately.",
   services = [
     {
       id: 1,
       title: "Technical Assistance",
-      description: "The Company offered technical help for HIVIK Hardware products. We provide complete technical information on the products and assembly. We also manage and report any issues are there in the products.",
+      description: "The Company offered technical help for ALENCO Hardware products. We provide complete technical information on the products and assembly. We also manage and report any issues are there in the products.",
       image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=80",
       icon: "⚙️"
     },
@@ -39,7 +39,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
     {
       id: 3,
       title: "Design",
-      description: "We provide the best door and window hardware accessories designing support to meet all your needs. Pooja Sales has the best team of qualified designers.",
+      description: "We provide the best door and window hardware accessories designing support to meet all your needs. Alenco has the best team of qualified designers.",
       image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80",
       icon: "📐"
     },

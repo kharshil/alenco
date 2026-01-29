@@ -21,7 +21,7 @@ export const ProductGroups: CollectionConfig = {
       required: true,
       label: 'Group Name',
       admin: {
-        description: 'e.g., HIVIK MULTI LOCKING',
+        description: 'e.g., ALENCO MULTI LOCKING',
       },
     },
     {

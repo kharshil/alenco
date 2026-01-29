@@ -19,9 +19,9 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({
-  companyName = "Pooja Sales",
+  companyName = "Alenco Sales",
   tagline = "SINCE 1982",
-  email = "info@poojasales.in",
+  email = "info@alencosales.in",
   phone = [
     "+91 28123 88515",
     "+91 99987 40409",

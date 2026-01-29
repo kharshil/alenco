@@ -11,9 +11,9 @@ interface AboutSectionProps {
 }
 
 const AboutSection: React.FC<AboutSectionProps> = ({
-  title = "About Pooja Sales & Hivik Hardware",
+  title = "Alenco Hardware",
   description = [
-    "Pooja Sales is a premier organization with years of experience delivering doors and window hardware & accessories. We have a variety of styles & designs of door and window Hardware that are the custom-made. The company has increased its reach and variety by improving the quality of service features. It follows unique rules to achieve its goals, like flexibility, quick responds, high-quality packing standard, and the best manufacturing facility. We set a standard in the industry by applying solid strategies. We have been serving the nation over the decades.",
+    "Alenco is a premier organization with years of experience delivering doors and window hardware & accessories. We have a variety of styles & designs of door and window Hardware that are the custom-made. The company has increased its reach and variety by improving the quality of service features. It follows unique rules to achieve its goals, like flexibility, quick responds, high-quality packing standard, and the best manufacturing facility. We set a standard in the industry by applying solid strategies. We have been serving the nation over the decades.",
     "A major part of the quality hardware manufacturers sold in India comes from architectural hardware firms in India. Our company has the best expert who is certified in this field. We want to reach the top position by delivering quality premium products of windows and door Hardware at an affordable price. The team we have is highly professional with specialized skills, knowledge, crafting & designing. Want to see our aesthetically designed accessories? Come to us & consult a call with our expertise. Education is important; some people have extraordinary hardware requirements when purchasing from a firm that sells doors and window Hardware & accessories."
   ],
   buttonText = "READ MORE",
@@ -38,10 +38,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({
             <span className="badge-text">About Us</span>
           </div>
           <h2 className="about-section__title">
-            <span className="title-main">{title.split('&')[0]}</span>
-            {title.includes('&') && (
-              <span className="title-sub">& {title.split('&')[1]}</span>
-            )}
+            <span className="title-main">About</span>
+              <span className="title-sub">{title}</span>
+            
           </h2>
         </div>
 

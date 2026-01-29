@@ -61,7 +61,7 @@ export default function ExperienceSection() {
           {/* Right Side - Content */}
           <div className="exp-section__text-block">
             <div className="text-badge">
-              <span className="badge-icon">★</span>
+              <span className="badge-icon1">★</span>
               <span className="badge-label">Industry Leader</span>
             </div>
             

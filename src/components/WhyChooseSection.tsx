@@ -122,11 +122,11 @@ export default function WhyChooseSection() {
           
           <h2 className="why-section__title">
             <span className="title-line">Why Choose</span>
-            <span className="title-highlight">Pooja Sales?</span>
+            <span className="title-highlight">Alenco?</span>
           </h2>
           
           <p className="why-section__description">
-            Pooja Sales is the leading business that offers the best quality, Aluminium window locks,
+            Alenco is the leading business that offers the best quality, Aluminium window locks,
             door locks, sliding window rollers, metro locks, uPVC window locks, rollers, Locking Espag,
             Aluminium Sliding folding systems, Customize product development and other products. We must
             simply use the best products. Our products are long-lasting and resistant to weather

@@ -21,7 +21,7 @@ export const Subcategories: CollectionConfig = {
       required: true,
       label: 'Subcategory Name',
       admin: {
-        description: 'e.g., HIVIK - CREMONE HANDLES FINISH, 27MM NON-EURO SERIES SLIDING WINDOW',
+        description: 'e.g., ALENCO - CREMONE HANDLES FINISH, 27MM NON-EURO SERIES SLIDING WINDOW',
       },
     },
     {
