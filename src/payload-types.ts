@@ -74,6 +74,7 @@ export interface Config {
     'product-groups': ProductGroup;
     products: Product;
     distributors: Distributor;
+    'contact-inquiries': ContactInquiry;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     'product-groups': ProductGroupsSelect<false> | ProductGroupsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     distributors: DistributorsSelect<false> | DistributorsSelect<true>;
+    'contact-inquiries': ContactInquiriesSelect<false> | ContactInquiriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -501,6 +503,28 @@ export interface Distributor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-inquiries".
+ */
+export interface ContactInquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  /**
+   * Track the status of this inquiry
+   */
+  status?: ('new' | 'read' | 'replied' | 'closed') | null;
+  /**
+   * Internal notes about this inquiry
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -550,6 +574,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'distributors';
         value: string | Distributor;
+      } | null)
+    | ({
+        relationTo: 'contact-inquiries';
+        value: string | ContactInquiry;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -759,6 +787,21 @@ export interface DistributorsSelect<T extends boolean = true> {
   email?: T;
   phone?: T;
   city?: T;
+  message?: T;
+  status?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-inquiries_select".
+ */
+export interface ContactInquiriesSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
   message?: T;
   status?: T;
   notes?: T;

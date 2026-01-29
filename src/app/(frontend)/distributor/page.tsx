@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import './Distributor.scss'
+import Breadcrumb from '@/components/Breadcrumb'
 
 interface FormData {
   name: string
@@ -118,13 +118,7 @@ export default function DistributorPage() {
       </section>
 
       {/* Breadcrumb */}
-      <div className="breadcrumb">
-        <div className="container">
-          <Link href="/">Home</Link>
-          <span className="separator">&gt;</span>
-          <span className="current">Become a Distributor</span>
-        </div>
-      </div>
+      <Breadcrumb items={[{ label: 'Become a Distributor' }]} />
 
       {/* Form Section */}
       <section className="distributor-form-section">
