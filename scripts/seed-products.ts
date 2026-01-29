@@ -1,6 +1,6 @@
 /**
  * Product Seed Data for Alenco
- * Run this script with: npx ts-node --esm src/scripts/seed-products.ts
+ * Run this script with: pnpm seed
  *
  * This script creates:
  * - Categories
@@ -9,7 +9,14 @@
  * - Products
  */
 
-import { getPayloadClient } from '../lib/payload'
+import 'dotenv/config'
+import { getPayload } from 'payload'
+import { importConfig } from 'payload/node'
+
+async function getPayloadClient() {
+  const config = await importConfig('../src/payload.config.ts')
+  return await getPayload({ config })
+}
 
 interface ProductData {
   name: string
