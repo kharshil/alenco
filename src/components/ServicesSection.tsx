@@ -72,7 +72,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
         {/* Header */}
         <div className="services-header">
           <div className="header-badge">
-            <span className="badge-icon">✨</span>
+            <span className="badge-icon3">✨</span>
             <span className="badge-text">Our Services</span>
           </div>
           

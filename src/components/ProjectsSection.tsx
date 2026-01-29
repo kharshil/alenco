@@ -84,7 +84,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         <div className="projects-header">
           <div className="header-content">
             <span className="header-badge">
-              <span className="badge-icon">🏗️</span>
+              <span className="badge-icon2">🏗️</span>
               <span className="badge-text">Portfolio</span>
             </span>
             <h2 className="projects-title">

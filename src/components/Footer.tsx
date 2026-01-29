@@ -2,6 +2,9 @@
 'use client';
 import React from 'react';
 import './Footer.scss';
+import Link from 'next/dist/client/link';
+import Image from 'next/image';
+import logoSrc from '../images/logo.png'
 
 interface FooterProps {
   companyName?: string;
@@ -57,16 +60,17 @@ const Footer: React.FC<FooterProps> = ({
               <div className="brand-wrapper">
                 {/* Logo */}
                 <div className="footer-logo">
-                  <div className="logo-mark">
+                  {/* <div className="logo-mark">
                     <svg viewBox="0 0 48 48" fill="none">
                       <path d="M24 4L44 14V34L24 44L4 34V14L24 4Z" fill="currentColor" opacity="0.2"/>
                       <path d="M24 4L44 14V34L24 44L4 34V14L24 4Z" stroke="currentColor" strokeWidth="2"/>
                       <circle cx="24" cy="24" r="8" fill="currentColor"/>
                     </svg>
-                  </div>
+                  </div> */}
                   <div className="logo-text">
-                    <span className="logo-tagline">{tagline}</span>
-                    <span className="logo-name">{companyName}</span>
+                        <Link href="/" className="logo">
+                        <Image src={logoSrc} alt="Company Logo" />
+                        </Link>
                   </div>
                 </div>
 

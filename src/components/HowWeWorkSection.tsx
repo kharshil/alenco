@@ -108,7 +108,7 @@ export default function HowWeWorkSection() {
           {/* Content Overlay */}
           <div className="hww-hero__content">
             <div className="hww-hero__badge">
-              <span className="badge-icon">⚡</span>
+              <span className="badge-icons">⚡</span>
               <span className="badge-text">Our Process</span>
             </div>
             
