@@ -48,7 +48,7 @@ export default function AboutPage() {
             deliver products that meet the highest standards
             of performance and reliability. Supported by a
             flexible and experienced management team,
-            Alenco's tightly integrated operations allow us to
+            Alenco&apos;s tightly integrated operations allow us to
             anticipate and respond quickly to customer
             requirements.
             At Alenco, we take pride in creating innovative,
