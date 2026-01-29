@@ -8,6 +8,7 @@ import {
   getProductGroupsBySubcategory,
 } from '@/lib/payload'
 import type { Media, Product, ProductGroup, Category } from '@/payload-types'
+import Breadcrumb from '@/components/Breadcrumb'
 import '../../products.scss'
 
 interface PageProps {
@@ -90,25 +91,13 @@ export default async function SubcategoryPage({ params }: PageProps) {
       </section>
 
       {/* Breadcrumb */}
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <div className="breadcrumb__container">
-          <ol className="breadcrumb__list">
-            <li className="breadcrumb__item">
-              <Link href="/" className="breadcrumb__link">Home</Link>
-              <span className="breadcrumb__separator">/</span>
-            </li>
-            <li className="breadcrumb__item">
-              <Link href="/#hardware-products" className="breadcrumb__link">Products</Link>
-              <span className="breadcrumb__separator">/</span>
-            </li>
-            <li className="breadcrumb__item">
-              <Link href={`/products/${categorySlug}`} className="breadcrumb__link">{categoryName}</Link>
-              <span className="breadcrumb__separator">/</span>
-            </li>
-            <li className="breadcrumb__item">{subcategory.name}</li>
-          </ol>
-        </div>
-      </nav>
+      <Breadcrumb
+        items={[
+          { label: 'Products', href: '/#hardware-products' },
+          { label: categoryName, href: `/products/${categorySlug}` },
+          { label: subcategory.name }
+        ]}
+      />
 
       {/* Subcategory Content */}
       {subcategoryImage && (

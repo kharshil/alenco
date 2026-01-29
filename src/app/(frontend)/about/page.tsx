@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import './About.scss'
 import ExperienceSection from '@/components/ExperienceSection'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default function AboutPage() {
   return (
@@ -11,9 +12,11 @@ export default function AboutPage() {
       <section className="about-hero">
         <div className="overlay">
           <h1>About Us</h1>
-          <p>Home / About Us</p>
         </div>
       </section>
+
+      {/* Breadcrumb */}
+      <Breadcrumb items={[{ label: 'About Us' }]} />
 
       {/* Welcome */}
       <section className="about-welcome container">

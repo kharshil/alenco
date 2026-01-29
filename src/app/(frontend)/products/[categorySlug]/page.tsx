@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getCategoryBySlug, getSubcategoriesByCategory } from '@/lib/payload'
 import type { Media, Subcategory } from '@/payload-types'
+import Breadcrumb from '@/components/Breadcrumb'
 import '../products.scss'
 
 interface PageProps {
@@ -38,21 +39,12 @@ export default async function CategoryPage({ params }: PageProps) {
       </section>
 
       {/* Breadcrumb */}
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <div className="breadcrumb__container">
-          <ol className="breadcrumb__list">
-            <li className="breadcrumb__item">
-              <Link href="/" className="breadcrumb__link">Home</Link>
-              <span className="breadcrumb__separator">/</span>
-            </li>
-            <li className="breadcrumb__item">
-              <Link href="/#hardware-products" className="breadcrumb__link">Products</Link>
-              <span className="breadcrumb__separator">/</span>
-            </li>
-            <li className="breadcrumb__item">{category.name}</li>
-          </ol>
-        </div>
-      </nav>
+      <Breadcrumb
+        items={[
+          { label: 'Products', href: '/#hardware-products' },
+          { label: category.name }
+        ]}
+      />
 
       {/* Category Content */}
       {categoryImage && (

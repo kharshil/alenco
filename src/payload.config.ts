@@ -12,6 +12,7 @@ import { Subcategories } from './collections/Subcategories'
 import { ProductGroups } from './collections/ProductGroups'
 import { Products } from './collections/Products'
 import { Distributors } from './collections/Distributors'
+import { ContactInquiries } from './collections/ContactInquiries'
 import { s3Storage } from '@payloadcms/storage-s3'
 
 const filename = fileURLToPath(import.meta.url)
@@ -24,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, Subcategories, ProductGroups, Products, Distributors],
+  collections: [Users, Media, Categories, Subcategories, ProductGroups, Products, Distributors, ContactInquiries],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

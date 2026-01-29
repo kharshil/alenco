@@ -1,19 +1,21 @@
 'use client'
 
-import Image from 'next/image'
 import './Project.scss'
 import ProjectsSection from '@/components/ProjectsSection'
+import Breadcrumb from '@/components/Breadcrumb'
 
-export default function ProjectPage() {
+export default function ProjectsPage() {
   return (
     <main className="about-page">
       {/* Hero */}
       <section className="about-hero">
         <div className="overlay">
           <h1>Projects</h1>
-          <p>Home / Projects</p>
         </div>
       </section>
+
+      {/* Breadcrumb */}
+      <Breadcrumb items={[{ label: 'Projects' }]} />
 
       <ProjectsSection/>
     </main>
