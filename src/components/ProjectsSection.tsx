@@ -89,7 +89,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </span>
             <h2 className="projects-title">
               <span className="title-main">{title}</span>
-              <span className="title-accent">We've Built</span>
+              <span className="title-accent">We&apos;ve Built</span>
             </h2>
             <p className="projects-subtitle">
               Showcasing excellence in architectural hardware installations across major cities
