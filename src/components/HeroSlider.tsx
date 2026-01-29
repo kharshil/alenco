@@ -154,10 +154,10 @@ export default function HeroSlider() {
                     {slide.subtitle}
                   </p>
                 )}
-                <div className="hero-slider__cta">
+                {/* <div className="hero-slider__cta">
                   <button className="cta-button cta-button--primary">Explore Range</button>
                   <button className="cta-button cta-button--secondary">Learn More</button>
-                </div>
+                </div> */}
               </div>
             </div>
 

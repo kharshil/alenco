@@ -566,6 +566,10 @@
     height: clamp(420px, 75vw, 500px);
   }
 
+  .badge-line{
+    display: none;
+  }
+
   .hero-slider__overlay--primary {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     background: linear-gradient(

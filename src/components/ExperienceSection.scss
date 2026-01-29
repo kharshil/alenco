@@ -377,6 +377,7 @@ $shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.2);
 .feature-icon {
   width: 24px;
   height: 24px;
+  display: flex;
   flex-shrink: 0;
   color: $primary;
   
@@ -397,7 +398,7 @@ $shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.2);
   margin-top: 32px;
 }
 
-.cta-button {
+.explore-button {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -502,6 +503,11 @@ $shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.2);
     min-height: auto;
   }
 
+.number-bg {
+  left: 0;
+  right: 0;
+}
+
   .exp-section__bg {
     background-attachment: scroll;
   }
@@ -593,7 +599,7 @@ $shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.2);
     font-size: 15px;
   }
 
-  .cta-button {
+  .explore-button {
     padding: 14px 28px;
     font-size: 15px;
     width: 100%;

@@ -527,12 +527,20 @@ $shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
   }
 
   .about-section__content {
-    gap: 48px;
+    grid-template-columns: 1fr;
+  }
+
+  .image-frame{
+    display: none;
   }
 
   .frame-corner {
     width: 50px;
     height: 50px;
+  }
+
+  .image-container{
+    aspect-ratio: unset;
   }
 }
 
@@ -561,10 +569,6 @@ $shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
   .about-image {
     position: relative;
     top: 0;
-  }
-
-  .image-container {
-    aspect-ratio: 16 / 11;
   }
 
   .stats-card {
@@ -611,9 +615,6 @@ $shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
     height: 40px;
   }
 
-  .image-container {
-    aspect-ratio: 4 / 5;
-  }
 
   .stats-card {
     flex-direction: column;

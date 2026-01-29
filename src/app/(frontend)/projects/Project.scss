@@ -1,0 +1,171 @@
+/* Variables */
+$primary: #2bb249;
+$primary-dark: darken(#2bb249, 10%);
+$primary-light: lighten(#2bb249, 12%);
+
+$dark: #0f172a;
+$gray-900: #1e293b;
+$gray-700: #334155;
+$gray-500: #64748b;
+$gray-300: #cbd5e1;
+$gray-100: #f1f5f9;
+$white: #ffffff;
+
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+/* Common */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+.about-page {
+  background: $white;
+  color: $gray-700;
+}
+
+/* Hero */
+.about-hero {
+  height: 300px;
+  background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+  position: relative;
+
+  .overlay {
+    background: rgba(0, 0, 0, 0.55);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 80px;
+    color: $white;
+
+    h1 {
+      font-size: 40px;
+    }
+  }
+}
+
+/* Welcome & About */
+.about-welcome,
+.about-company {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+
+  h2 {
+    color: $dark;
+    margin-bottom: 16px;
+  }
+
+  p {
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  img {
+    border-radius: 8px;
+    box-shadow: $shadow-md;
+  }
+}
+
+/* Infrastructure */
+.about-infra {
+  background: $gray-100;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: $dark;
+  }
+
+  .infra-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: $gray-700;
+      }
+    }
+  }
+}
+
+/* Vision & Mission */
+.about-vision-mission {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+
+  .card {
+    background: $primary;
+    color: $white;
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: $shadow-sm;
+
+    h3 {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+/* Experience */
+.about-experience {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url('/images/about/experience.jpg') center/cover no-repeat;
+  text-align: center;
+  color: $white;
+  padding: 80px 20px;
+
+  h2 {
+    font-size: 48px;
+
+    span {
+      color: $primary;
+    }
+  }
+}
+
+/* Certifications */
+.about-certifications {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+
+  img {
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: 0.3s;
+
+    &:hover {
+      filter: none;
+      opacity: 1;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-welcome,
+  .about-company,
+  .infra-grid,
+  .about-vision-mission {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero .overlay {
+    padding-left: 20px;
+  }
+}

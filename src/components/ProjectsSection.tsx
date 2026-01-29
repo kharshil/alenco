@@ -172,7 +172,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         </div>
 
         {/* Footer CTA */}
-        <div className="projects-footer">
+        {/* <div className="projects-footer">
           <a href={buttonLink} className="load-more-btn">
             <span className="btn-content">
               <span className="btn-label">{buttonText}</span>
@@ -183,7 +183,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             <span className="btn-glow"></span>
           </a>
           
-        </div>
+        </div> */}
       </div>
     </section>
   );

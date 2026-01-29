@@ -2,10 +2,9 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import './Header.scss'
 import logoSrc from '../images/logo.png'
-import Image from 'next/image'
-
 
 interface NestedDropdownItem {
   label: string
@@ -15,7 +14,6 @@ interface NestedDropdownItem {
 interface DropdownItem {
   label: string
   href: string
-  featured?: boolean
   submenu?: NestedDropdownItem[]
 }
 
@@ -30,18 +28,7 @@ const navItems: NavItem[] = [
   {
     label: 'ABOUT US',
     href: '/about',
-    dropdown: [
-      { label: 'Certificates', href: '/products/certificates' },
-      // {
-      //   label: 'Gallery',
-      //   href: '/products/gallery',
-      //   featured: true,
-      //   submenu: [
-      //     { label: 'Photo Gallery', href: '/products/gallery/photos' },
-      //     { label: 'Video Gallery', href: '/products/gallery/videos' },
-      //   ],
-      // },
-    ],
+    dropdown: [{ label: 'Certificates', href: '/products/certificates' }],
   },
   {
     label: 'PRODUCTS',
@@ -61,99 +48,130 @@ const navItems: NavItem[] = [
   { label: 'SERVICES', href: '/services' },
   { label: 'PROJECTS', href: '/projects' },
   { label: 'BECOME A DISTRIBUTOR', href: '/distributor' },
-  { label: 'BLOG', href: '/blog' },
 ]
 
 export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null)
 
   return (
-    <header className="header">
-      <div className="header-container">
-        {/* Logo */}
-        <Link href="/" className="logo">
-          <Image src={logoSrc} alt="Company Logo" />
-        </Link>
+    <>
+      <header className="header">
+        <div className="header-container">
+          {/* Logo */}
+          <Link href="/" className="logo">
+            <Image src={logoSrc} alt="Company Logo" priority />
+          </Link>
 
-        {/* Navigation */}
-        <nav className="nav">
-          {navItems.map((item) => (
-            <div
-              key={item.label}
-              className="nav-item-wrapper"
-              onMouseEnter={() => setOpenDropdown(item.label)}
-              onMouseLeave={() => {
-                setOpenDropdown(null)
-                setOpenSubmenu(null)
-              }}
-            >
-              <Link href={item.href} className="nav-item">
-                {item.label}
-              </Link>
+          {/* Desktop Navigation */}
+          <nav className="nav">
+            {navItems.map((item) => (
+              <div
+                key={item.label}
+                className="nav-item-wrapper"
+                onMouseEnter={() => setOpenDropdown(item.label)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <Link href={item.href} className="nav-item">
+                  {item.label}
+                </Link>
 
-              {/* Dropdown Menu */}
-              {item.dropdown && (
-                <div
-                  className={`dropdown ${
-                    openDropdown === item.label ? 'active' : ''
-                  }`}
-                >
-                  {item.dropdown.map((dropdownItem) => (
-                    <div
-                      key={dropdownItem.label}
-                      className="dropdown-item-wrapper"
-                      onMouseEnter={() => setOpenSubmenu(dropdownItem.label)}
-                      onMouseLeave={() => setOpenSubmenu(null)}
-                    >
+                {item.dropdown && (
+                  <div
+                    className={`dropdown ${
+                      openDropdown === item.label ? 'active' : ''
+                    }`}
+                  >
+                    {item.dropdown.map((d) => (
                       <Link
-                        href={dropdownItem.href}
-                        onClick={(e) => {
-                          if (dropdownItem.href === '#') e.preventDefault()
-                        }}
-                        className={`dropdown-item ${
-                          dropdownItem.featured ? 'featured' : ''
-                        } ${dropdownItem.submenu ? 'has-submenu' : ''}`}
+                        key={d.label}
+                        href={d.href}
+                        className="dropdown-item"
                       >
-                        {dropdownItem.label}
-                        {dropdownItem.submenu ? (
-                          <span className="chevron">›</span>
-                        ) : dropdownItem.featured ? (
-                          <span className="arrow">›</span>
-                        ) : null}
+                        {d.label}
                       </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
 
-                      {/* Nested Submenu */}
-                      {dropdownItem.submenu && (
-                        <div
-                          className={`submenu ${
-                            openSubmenu === dropdownItem.label ? 'active' : ''
-                          }`}
+          {/* Mobile Menu Button */}
+          <button
+            className="menu-toggle"
+            onClick={() => setMobileOpen(true)}
+          >
+            ☰
+          </button>
+
+          {/* CTA */}
+          <Link href="/contact" className="contact-button">
+            CONTACT US
+          </Link>
+        </div>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div className={`mobile-drawer ${mobileOpen ? 'open' : ''}`}>
+        <div className="drawer-header">
+          <span>Menu</span>
+          <button onClick={() => setMobileOpen(false)}>✕</button>
+        </div>
+
+        <div className="drawer-nav">
+          {navItems.map((item) => (
+            <div key={item.label} className="drawer-item">
+              {item.dropdown ? (
+                <>
+                  <button
+                    className="drawer-link"
+                    onClick={() =>
+                      setMobileDropdown(
+                        mobileDropdown === item.label ? null : item.label
+                      )
+                    }
+                  >
+                    {item.label}
+                    <span>›</span>
+                  </button>
+
+                  {mobileDropdown === item.label && (
+                    <div className="drawer-submenu">
+                      {item.dropdown.map((sub) => (
+                        <Link
+                          key={sub.label}
+                          href={sub.href}
+                          onClick={() => setMobileOpen(false)}
                         >
-                          {dropdownItem.submenu.map((subItem) => (
-                            <Link
-                              key={subItem.label}
-                              href={subItem.href}
-                              className="submenu-item"
-                            >
-                              {subItem.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
+                          {sub.label}
+                        </Link>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="drawer-link"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
               )}
             </div>
           ))}
-        </nav>
-
-        {/* CTA Button */}
-        <Link href="/contact" className="cta-button">
-          CONTACT US
-        </Link>
+        </div>
       </div>
-    </header>
+
+      {/* Overlay */}
+      {mobileOpen && (
+        <div
+          className="drawer-overlay"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+    </>
   )
 }
