@@ -1,7 +1,7 @@
 // components/ClientsSection/ClientsSection.tsx
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ClientsSection.scss';
 
 interface Client {
@@ -62,136 +62,74 @@ const ClientsSection: React.FC<ClientsSectionProps> = ({
     }
   ]
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const [hoveredClient, setHoveredClient] = useState<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const itemsPerView = 4;
-  const totalSlides = Math.ceil(clients.length / itemsPerView);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-
-    const interval = setInterval(() => {
-      handleNext();
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex, isAutoPlaying]);
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalSlides);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
-
-  const handleDotClick = (index: number) => {
-    setCurrentIndex(index);
-    setIsAutoPlaying(false);
-  };
+  // Duplicate clients for seamless loop
+  const duplicatedClients = [...clients, ...clients];
 
   return (
-    <section className="clients-section">
-      <div className="clients-container">
-        <div className="clients-header">
-          <h2 className="clients-title">{title}</h2>
-          <p className="clients-subtitle">{subtitle}</p>
-          <div className="header-decoration">
-            <span className="deco-line left"></span>
-            <span className="deco-diamond"></span>
-            <span className="deco-line right"></span>
+    <section className="trust-section">
+      
+
+      <div className="trust-container">
+        {/* Header */}
+        <div className="trust-header">
+          <div className="header-label">
+            <span className="label-icon">★</span>
+            <span className="label-txt">Trusted Partners</span>
           </div>
+          
+          <h2 className="trust-heading">
+            <span className="heading-line">Trusted by</span>
+            <span className="heading-highlight">Industry Leaders</span>
+          </h2>
+          
+          <p className="trust-desc">{subtitle}</p>
+
         </div>
 
-        <div className="clients-slider">
-          <button 
-            className="slider-nav prev"
-            onClick={handlePrev}
-            aria-label="Previous slide"
-          >
-            <span>←</span>
-          </button>
-
+        {/* Infinite Marquee Rows */}
+        <div className="trust-marquee">
+          {/* Row 1 - Left to Right */}
           <div 
-            className="clients-wrapper"
-            onMouseEnter={() => setIsAutoPlaying(false)}
-            onMouseLeave={() => setIsAutoPlaying(true)}
+            className="marquee-row marquee-row--ltr"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
           >
-            <div 
-              className="clients-track"
-              ref={trackRef}
-              style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-              }}
-            >
-              {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-                <div key={slideIndex} className="clients-slide">
-                  {clients
-                    .slice(slideIndex * itemsPerView, (slideIndex + 1) * itemsPerView)
-                    .map((client) => (
-                      <div key={client.id} className="client-card">
-                        <div className="client-inner">
-                          <div className="client-logo-wrapper">
-                            <img 
-                              src={client.logo} 
-                              alt={client.name}
-                              className="client-logo"
-                            />
-                            <div className="logo-overlay">
-                              <span className="client-name">{client.name}</span>
-                            </div>
-                          </div>
-                          <div className="client-shine"></div>
-                        </div>
-                      </div>
-                    ))}
+            <div className="marquee-track">
+              {duplicatedClients.map((client, index) => (
+                <div 
+                  key={`ltr-${client.id}-${index}`}
+                  className={`trust-card ${hoveredClient === client.id ? 'is-hovered' : ''}`}
+                  onMouseEnter={() => setHoveredClient(client.id)}
+                  onMouseLeave={() => setHoveredClient(null)}
+                >
+                  <div className="card-frame">
+                    {/* Logo Container */}
+                    <div className="logo-holder">
+                      <img 
+                        src={client.logo} 
+                        alt={client.name}
+                        className="logo-img"
+                      />
+                      <div className="logo-filter"></div>
+                    </div>
+
+                    
+
+                    {/* Corner Accent */}
+                    <div className="card-accent"></div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <button 
-            className="slider-nav next"
-            onClick={handleNext}
-            aria-label="Next slide"
-          >
-            <span>→</span>
-          </button>
+         
         </div>
 
-        <div className="slider-dots">
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <button
-              key={index}
-              className={`dot ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => handleDotClick(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        <div className="clients-stats">
-          <div className="stat-item">
-            <div className="stat-number">500+</div>
-            <div className="stat-label">Happy Clients</div>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-item">
-            <div className="stat-number">15+</div>
-            <div className="stat-label">Years Experience</div>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-item">
-            <div className="stat-number">1000+</div>
-            <div className="stat-label">Projects Completed</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="background-pattern">
-        <div className="pattern-grid"></div>
       </div>
     </section>
   );

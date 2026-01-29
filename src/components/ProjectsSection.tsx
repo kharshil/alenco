@@ -67,69 +67,123 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     }
   ]
 }) => {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [activeProject, setActiveProject] = useState<number | null>(null);
 
   return (
     <section className="projects-section">
+      {/* Background Elements */}
+      <div className="projects-bg" aria-hidden="true">
+        <div className="bg-pattern"></div>
+        <div className="bg-shape bg-shape--1"></div>
+        <div className="bg-shape bg-shape--2"></div>
+        <div className="bg-gradient"></div>
+      </div>
+
       <div className="projects-container">
+        {/* Header */}
         <div className="projects-header">
-          <h2 className="projects-title">{title}</h2>
-          <div className="title-underline">
-            <span className="underline-dot"></span>
+          <div className="header-content">
+            <span className="header-badge">
+              <span className="badge-icon">🏗️</span>
+              <span className="badge-text">Portfolio</span>
+            </span>
+            <h2 className="projects-title">
+              <span className="title-main">{title}</span>
+              <span className="title-accent">We've Built</span>
+            </h2>
+            <p className="projects-subtitle">
+              Showcasing excellence in architectural hardware installations across major cities
+            </p>
           </div>
+          
+          {/* Stats */}
+          {/* <div className="projects-stats">
+            <div className="stat-item">
+              <div className="stat-number">50+</div>
+              <div className="stat-label">Completed</div>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-item">
+              <div className="stat-number">15+</div>
+              <div className="stat-label">Cities</div>
+            </div>
+          </div> */}
         </div>
 
+        {/* Projects Grid */}
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className="project-card"
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onMouseEnter={() => setHoveredId(project.id)}
-              onMouseLeave={() => setHoveredId(null)}
+              className={`project-card ${activeProject === project.id ? 'is-active' : ''}`}
+              style={{ '--card-index': index } as React.CSSProperties}
+              onMouseEnter={() => setActiveProject(project.id)}
+              onMouseLeave={() => setActiveProject(null)}
             >
-              <div className="project-image-container">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="project-image"
-                />
-                <div className={`project-overlay ${hoveredId === project.id ? 'active' : ''}`}>
-                  <div className="overlay-content">
-                    <span className="project-category">{project.category}</span>
-                    <button className="view-project-btn">
-                      View Project
-                      <span className="btn-arrow">→</span>
-                    </button>
-                  </div>
+              {/* Image Container */}
+              <div className="project-visual">
+                <div className="visual-frame">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="project-image"
+                  />
+                  <div className="image-overlay"></div>
                 </div>
-                <div className="project-corner-accent"></div>
+
+                {/* Category Badge */}
+                <div className="category-badge">
+                  <span className="category-dot"></span>
+                  <span className="category-text">{project.category}</span>
+                </div>
+
+                {/* Hover Content */}
+                {/* <div className="hover-content">
+                  <button className="view-btn" aria-label={`View ${project.title}`}>
+                    <svg className="btn-icon" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span className="btn-text">View Project</span>
+                  </button>
+                </div> */}
+
+                {/* Number Badge */}
+                <div className="number-badge">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
               </div>
+
+              {/* Info Section */}
               <div className="project-info">
-                <h3 className="project-title">{project.title}</h3>
+                <h3 className="project-name">{project.title}</h3>
                 <div className="project-location">
-                  <span className="location-icon">📍</span>
-                  <span>{project.location}</span>
+                  <svg className="location-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 21s-8-4.5-8-11.8A8 8 0 0 1 12 1a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="12" cy="9" r="2.5" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                  <span className="location-text">{project.location}</span>
                 </div>
               </div>
+
+              {/* Decorative Corner */}
+              <div className="card-corner"></div>
             </div>
           ))}
         </div>
 
+        {/* Footer CTA */}
         <div className="projects-footer">
-          <a href={buttonLink} className="more-projects-btn">
-            {buttonText}
-            <span className="btn-icon">
-              <span className="arrow-1">→</span>
-              <span className="arrow-2">→</span>
+          <a href={buttonLink} className="load-more-btn">
+            <span className="btn-content">
+              <span className="btn-label">{buttonText}</span>
+              <svg className="btn-arrow" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </span>
+            <span className="btn-glow"></span>
           </a>
+          
         </div>
-      </div>
-
-      <div className="background-decoration">
-        <div className="deco-circle deco-1"></div>
-        <div className="deco-circle deco-2"></div>
       </div>
     </section>
   );

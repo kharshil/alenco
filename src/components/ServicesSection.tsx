@@ -1,5 +1,7 @@
 // components/ServicesSection/ServicesSection.tsx
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import './ServicesSection.scss';
 
 interface Service {
@@ -50,38 +52,124 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
     }
   ]
 }) => {
+  const [activeService, setActiveService] = useState<number | null>(null);
+
   return (
     <section className="services-section">
+      {/* Background Elements */}
+      <div className="services-bg" aria-hidden="true">
+        <div className="bg-grid"></div>
+        <div className="bg-shape bg-shape--1"></div>
+        <div className="bg-shape bg-shape--2"></div>
+        <div className="bg-lines">
+          <div className="line line--1"></div>
+          <div className="line line--2"></div>
+          <div className="line line--3"></div>
+        </div>
+      </div>
+
       <div className="services-container">
+        {/* Header */}
         <div className="services-header">
-          <h2 className="services-title">{title}</h2>
+          <div className="header-badge">
+            <span className="badge-icon">✨</span>
+            <span className="badge-text">Our Services</span>
+          </div>
+          
+          <h2 className="services-title">
+            <span className="title-main1">What We
+            <span className="title-accent1"> Offer</span>
+            </span>
+          </h2>
+          
           <p className="services-subtitle">{subtitle}</p>
+
+          {/* Decorative Line */}
+          
         </div>
 
-        <div className="services-grid">
+        {/* Services List */}
+        <div className="services-list">
           {services.map((service, index) => (
             <div 
               key={service.id} 
-              className="service-card"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`service-item ${activeService === service.id ? 'is-active' : ''} ${index % 2 === 0 ? 'is-left' : 'is-right'}`}
+              style={{ '--item-index': index } as React.CSSProperties}
+              onMouseEnter={() => setActiveService(service.id)}
+              onMouseLeave={() => setActiveService(null)}
             >
-              <div className="service-image-wrapper">
-                <img 
-                  src={service.image} 
-                  alt={service.title}
-                  className="service-image"
-                />
-                <div className="service-overlay">
-                  <span className="service-icon">{service.icon}</span>
+              {/* Service Number */}
+              {/* <div className="service-number">
+                <span className="number-text">{String(index + 1).padStart(2, '0')}</span>
+                <div className="number-line"></div>
+              </div> */}
+
+              {/* Service Card */}
+              <div className="service-card">
+                {/* Image Section */}
+                <div className="service-visual">
+                  <div className="visual-wrapper">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="service-image"
+                    />
+                    <div className="image-overlay"></div>
+                    
+                    {/* Icon Badge */}
+                    <div className="icon-badge">
+                      <div className="icon-bg"></div>
+                      <span className="icon-emoji">{service.icon}</span>
+                    </div>
+
+                    {/* Hover Arrow */}
+                    <div className="hover-arrow">
+                      <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="service-content">
-                <h3 className="service-title">{service.title}</h3>
-                <p className="service-description">{service.description}</p>
+
+                {/* Content Section */}
+                <div className="service-content">
+                  <div className="content-wrapper">
+                    {/* Category Tag */}
+                    <div className="service-tag">
+                      <span className="tag-dot"></span>
+                      <span className="tag-text">Service</span>
+                    </div>
+
+                    <h3 className="service-title">{service.title}</h3>
+                    <p className="service-description">{service.description}</p>
+
+                    {/* Learn More Link */}
+                    {/* <div className="service-link">
+                      <span className="link-text">Learn More</span>
+                      <svg className="link-arrow" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div> */}
+                  </div>
+
+                  {/* Decorative Corner */}
+                  <div className="content-corner"></div>
+                </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Footer CTA */}
+        {/* <div className="services-footer">
+          <p className="footer-text">Need a custom solution?</p>
+          <a href="#contact" className="footer-cta">
+            <span className="cta-text">Contact Our Team</span>
+            <svg className="cta-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div> */}
       </div>
     </section>
   );

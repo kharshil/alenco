@@ -32,13 +32,21 @@ function getFirstProductImage(product: Product): string {
 
 export default async function SubcategoryPage({ params }: PageProps) {
   const { categorySlug, subcategorySlug } = await params
+  
+  console.log('Category Slug:', categorySlug)
+  console.log('Subcategory Slug:', subcategorySlug)
 
   const [category, subcategory] = await Promise.all([
     getCategoryBySlug(categorySlug),
     getSubcategoryBySlug(subcategorySlug),
   ])
+  
+  console.log('Category found:', !!category)
+  console.log('Subcategory found:', !!subcategory)
+  console.log('Subcategory data:', subcategory)
 
   if (!category || !subcategory) {
+    console.log('Triggering notFound()')
     notFound()
   }
 
@@ -77,9 +85,7 @@ export default async function SubcategoryPage({ params }: PageProps) {
         <div className="product-hero__content">
           <span className="product-hero__badge">{categoryName}</span>
           <h1 className="product-hero__title">{subcategory.name}</h1>
-          {subcategory.shortDescription && (
-            <p className="product-hero__description">{subcategory.shortDescription}</p>
-          )}
+          
         </div>
       </section>
 

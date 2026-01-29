@@ -62,15 +62,21 @@ export async function getSubcategoriesByCategory(categoryId: string | number) {
 
 export async function getSubcategoryBySlug(slug: string) {
   const payload = await getPayloadClient()
+  
+  // Decode first
+  const decodedSlug = decodeURIComponent(slug)
+  
   const subcategories = await payload.find({
     collection: 'subcategories',
     where: {
       slug: {
-        equals: slug,
+        equals: decodedSlug,
       },
     },
     depth: 2,
   })
+  
+  
   return subcategories.docs[0] || null
 }
 

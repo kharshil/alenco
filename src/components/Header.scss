@@ -21,19 +21,6 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-
-  .logo-text {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1e5a96;
-    letter-spacing: 2px;
-
-    &::before {
-      content: '⬟ ';
-      color: #d32f2f;
-      margin-right: 8px;
-    }
-  }
 }
 
 .nav {
@@ -58,7 +45,7 @@
       align-items: center;
 
       &:hover {
-        color: #1e5a96;
+        color: #2bb249;
       }
     }
 
@@ -93,6 +80,7 @@
           justify-content: space-between;
           padding: 3px 20px;
           color: #333;
+          white-space: nowrap;
           text-decoration: none;
           font-size: 13px;
           font-weight: 500;
@@ -100,7 +88,7 @@
 
           &:hover {
             background-color: #f5f5f5;
-            color: #1e5a96;
+            color: #2bb249;
           }
 
           &.has-submenu {
@@ -149,7 +137,7 @@
 
             &:hover {
               background-color: #f5f5f5;
-              color: #1e5a96;
+              color: #2bb249;
               padding-left: 24px;
             }
           }
@@ -161,7 +149,7 @@
 
 .cta-button {
   flex-shrink: 0;
-  background-color: #1e5a96;
+  background-color: #2bb249;
   color: white;
   text-decoration: none;
   padding: 12px 24px;
@@ -173,8 +161,8 @@
   display: inline-block;
 
   &:hover {
-    background-color: #154280;
-    box-shadow: 0 4px 12px rgba(30, 90, 150, 0.3);
+    background-color: #319447;
+    box-shadow: 0 4px 12px rgba(79, 199, 119, 0.3);
   }
 }
 

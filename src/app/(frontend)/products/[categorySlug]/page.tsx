@@ -33,9 +33,7 @@ export default async function CategoryPage({ params }: PageProps) {
         <div className="product-hero__content">
           <span className="product-hero__badge">Products</span>
           <h1 className="product-hero__title">{category.name}</h1>
-          {category.shortDescription && (
-            <p className="product-hero__description">{category.shortDescription}</p>
-          )}
+          
         </div>
       </section>
 

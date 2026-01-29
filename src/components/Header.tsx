@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import './Header.scss'
+import logoSrc from '../images/logo.png'
+import Image from 'next/image'
+
 
 interface NestedDropdownItem {
   label: string
@@ -29,15 +32,15 @@ const navItems: NavItem[] = [
     href: '/about',
     dropdown: [
       { label: 'Certificates', href: '/products/certificates' },
-      {
-        label: 'Gallery',
-        href: '/products/gallery',
-        featured: true,
-        submenu: [
-          { label: 'Photo Gallery', href: '/products/gallery/photos' },
-          { label: 'Video Gallery', href: '/products/gallery/videos' },
-        ],
-      },
+      // {
+      //   label: 'Gallery',
+      //   href: '/products/gallery',
+      //   featured: true,
+      //   submenu: [
+      //     { label: 'Photo Gallery', href: '/products/gallery/photos' },
+      //     { label: 'Video Gallery', href: '/products/gallery/videos' },
+      //   ],
+      // },
     ],
   },
   {
@@ -70,7 +73,7 @@ export default function Header() {
       <div className="header-container">
         {/* Logo */}
         <Link href="/" className="logo">
-          <div className="logo-text">HIVIK</div>
+          <Image src={logoSrc} alt="Company Logo" />
         </Link>
 
         {/* Navigation */}

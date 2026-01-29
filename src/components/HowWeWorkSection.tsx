@@ -12,7 +12,7 @@ const items: Item[] = [
   { icon: 'range', title: '2000+ Product Range Options.' },
   { icon: 'experts', title: 'Managed by experts.' },
   { icon: 'export', title: 'Export in Many Countries.' },
-  { icon: 'results', title: 'Results as per clients’ specifications.' },
+  { icon: 'results', title: 'Results as per clients specifications.' },
   { icon: 'pac', title: 'PAC (Product as Customize) design and develop.' },
 ]
 
@@ -96,25 +96,69 @@ function Icon({ name }: { name: Item['icon'] }) {
 
 export default function HowWeWorkSection() {
   return (
-    <section className="how-we-work" aria-label="How we work">
-      <div className="how-we-work__container">
-        <div className="how-we-work__left">
-          <div className="how-we-work__image" aria-hidden="true" />
-          <div className="how-we-work__headline">
-            <span className="how-we-work__how">How</span>
-            <span className="how-we-work__we">We</span>
-            <span className="how-we-work__work">Work</span>
+    <section className="hww-section" aria-label="How we work">
+      
+
+      <div className="hww-section__container">
+        {/* Left Side - Hero Section */}
+        <div className="hww-section__hero">
+          {/* Background Image */}
+          <div className="hww-hero__image" aria-hidden="true"></div>
+          
+          {/* Content Overlay */}
+          <div className="hww-hero__content">
+            <div className="hww-hero__badge">
+              <span className="badge-icon">⚡</span>
+              <span className="badge-text">Our Process</span>
+            </div>
+            
+            <h2 className="hww-hero__title">
+              <span className="title-word title-word--1">How</span>
+              <span className="title-word title-word--2">We</span>
+              <span className="title-word title-word--3">Work</span>
+            </h2>
+            
+            <p className="hww-hero__description">
+              Our proven methodology ensures exceptional results through systematic planning and expert execution
+            </p>
+
+            {/* Decorative Elements */}
+            <div className="hww-hero__decoration">
+              <div className="deco-circle"></div>
+              <div className="deco-line1"></div>
+            </div>
           </div>
         </div>
 
-        <div className="how-we-work__right">
-          <ul className="how-we-work__list">
-            {items.map((item) => (
-              <li key={item.title} className="how-we-work__item">
-                <span className="how-we-work__icon" aria-hidden="true">
-                  <Icon name={item.icon} />
-                </span>
-                <span className="how-we-work__text">{item.title}</span>
+        {/* Right Side - Process Timeline */}
+        <div className="hww-section__process">
+          <div className="hww-process__header">
+            <h3 className="process-subtitle">Our Methodology</h3>
+            <div className="process-line" aria-hidden="true"></div>
+          </div>
+
+          <ul className="hww-process__list">
+            {items.map((item, index) => (
+              <li 
+                key={item.title} 
+                className="process-item"
+                style={{ '--item-index': index } as React.CSSProperties}
+              >
+                {/* Icon Circle */}
+                <div className="process-item__icon-wrapper">
+                  <div className="icon-circle">
+                    <span className="process-icon" aria-hidden="true">
+                      <Icon name={item.icon} />
+                    </span>
+                  </div>
+                  
+                </div>
+
+                {/* Content */}
+                <div className="process-item__content">
+                  <p className="process-text">{item.title}</p>
+                  
+                </div>
               </li>
             ))}
           </ul>
@@ -123,4 +167,3 @@ export default function HowWeWorkSection() {
     </section>
   )
 }
-
