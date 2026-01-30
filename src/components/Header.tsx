@@ -28,7 +28,7 @@ const navItems: NavItem[] = [
   {
     label: 'ABOUT US',
     href: '/about',
-    dropdown: [{ label: 'Certificates', href: '/products/certificates' }],
+    dropdown: [{ label: 'Certificates', href: '/certificates' }],
   },
   {
     label: 'PRODUCTS',

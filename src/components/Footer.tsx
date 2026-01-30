@@ -155,34 +155,23 @@ const Footer: React.FC<FooterProps> = ({
               </div>
             </div>
 
-            {/* Column 4: Newsletter */}
+            {/* Column 4: Quick Links */}
             <div className="footer-col">
               <h3 className="footer-heading">
                 <span className="heading-icon">
                   <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </span>
-                Stay Updated
+                Quick Links
               </h3>
-              <p className="newsletter-text">
-                Subscribe to get updates on new products and exclusive offers.
-              </p>
-              <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-                <div className="form-group">
-                  <input 
-                    type="email" 
-                    className="form-input" 
-                    placeholder="Your email address"
-                    required
-                  />
-                  <button type="submit" className="form-submit">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </button>
-                </div>
-              </form>
+              <nav className="footer-nav">
+                <Link href="/about-us" className="footerlink">About Us</Link>
+                <Link href="/products" className="footerlink">Products</Link>
+                <Link href="/services" className="footerlink">Services</Link>
+                <Link href="/projects" className="footerlink">Projects</Link>
+                <Link href="/become-a-distributor" className="footerlink">Become a Distributor</Link>
+              </nav>
             </div>
           </div>
         </div>
