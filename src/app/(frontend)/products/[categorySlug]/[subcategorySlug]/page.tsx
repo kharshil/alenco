@@ -68,10 +68,10 @@ export default async function SubcategoryPage({ params }: PageProps) {
   return (
     <div className="subcategory-page">
       {/* Hero Banner */}
-      <section className="product-hero">
-        <div className="product-hero__content">
-          <span className="product-hero__badge">{categoryName}</span>
-          <h1 className="product-hero__title">{subcategory.name}</h1>
+     
+      <section className="distributor-hero">
+        <div className="hero-content">
+          <h1>{subcategory.name}</h1>
         </div>
       </section>
 

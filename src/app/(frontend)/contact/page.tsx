@@ -110,7 +110,7 @@ export default function ContactPage() {
   return (
     <main className="contact-page">
       {/* Hero Section */}
-      <section className="contact-hero">
+      <section className="distributor-hero">
         <div className="hero-content">
           <h1>Contact Us</h1>
         </div>

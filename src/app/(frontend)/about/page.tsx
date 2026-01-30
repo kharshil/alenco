@@ -9,8 +9,8 @@ export default function AboutPage() {
   return (
     <main className="about-page">
       {/* Hero */}
-      <section className="about-hero">
-        <div className="overlay">
+      <section className="distributor-hero">
+        <div className="hero-content">
           <h1>About Us</h1>
         </div>
       </section>
