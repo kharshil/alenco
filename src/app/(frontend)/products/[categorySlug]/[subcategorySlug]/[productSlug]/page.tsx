@@ -102,10 +102,10 @@ export default function ProductDetailPage({ params }: PageProps) {
   return (
     <div className="product-detail-page">
       {/* Hero Banner */}
-      <section className="product-hero" style={{ height: '200px' }}>
-        <div className="product-hero__content">
-          <span className="product-hero__badge">{subcategoryName}</span>
-          <h1 className="product-hero__title" style={{ fontSize: '32px' }}>{product.name}</h1>
+      
+      <section className="distributor-hero">
+        <div className="hero-content">
+          <h1>{product.name}</h1>
         </div>
       </section>
 

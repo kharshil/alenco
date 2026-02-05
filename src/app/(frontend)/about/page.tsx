@@ -9,8 +9,8 @@ export default function AboutPage() {
   return (
     <main className="about-page">
       {/* Hero */}
-      <section className="about-hero">
-        <div className="overlay">
+      <section className="distributor-hero">
+        <div className="hero-content">
           <h1>About Us</h1>
         </div>
       </section>
@@ -71,7 +71,7 @@ export default function AboutPage() {
       </section>
 
       {/* Infrastructure */}
-      <section className="about-infra">
+      <section className="about-infra1">
         <div className="container">
           <h2>Industries Served</h2>
           <div className="infra-grid">
@@ -84,10 +84,10 @@ export default function AboutPage() {
               />
             </div>
             <ul>
-              <li>✔ Doors & Windows</li>
-              <li>✔ Architectural Hardware and Assemblies Solutions</li>
-              <li>✔ Aluminium Extrusion</li>
-              <li>✔ Machined Components</li>
+              <li>Doors & Windows</li>
+              <li>Architectural Hardware and Assemblies Solutions</li>
+              <li>Aluminium Extrusion</li>
+              <li>Machined Components</li>
             </ul>
           </div>
         </div>

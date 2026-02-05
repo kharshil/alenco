@@ -30,11 +30,10 @@ export default async function CategoryPage({ params }: PageProps) {
   return (
     <div className="category-page">
       {/* Hero Banner */}
-      <section className="product-hero">
-        <div className="product-hero__content">
-          <span className="product-hero__badge">Products</span>
-          <h1 className="product-hero__title">{category.name}</h1>
-          
+      
+      <section className="distributor-hero">
+        <div className="hero-content">
+          <h1>{category.name}</h1>
         </div>
       </section>
 

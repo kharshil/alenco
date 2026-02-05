@@ -110,7 +110,7 @@ export default function ContactPage() {
   return (
     <main className="contact-page">
       {/* Hero Section */}
-      <section className="contact-hero">
+      <section className="distributor-hero">
         <div className="hero-content">
           <h1>Contact Us</h1>
         </div>
@@ -131,7 +131,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3>Our Address</h3>
-              <p>Survey No. 167, Near Torrent Power, Dediyasan, GIDC Phase-2, Mehsana, Gujarat - 384002, India</p>
+              <p>Plot No. 40, SRS Industrial Park, N.H. No. 8, Beside Darshan Hotel, Ankhi, Por, Vadodara – 391243. (GUJ.) INDIA</p>
             </div>
 
             <div className="contact-info-card">
@@ -141,8 +141,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3>Phone Number</h3>
-              <p>+91 98795 12345</p>
-              <p>+91 2762 282345</p>
+              <p>+91 7069094255</p>
             </div>
 
             <div className="contact-info-card">
@@ -153,8 +152,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <h3>Email Address</h3>
-              <p>archanlathiya222@gmail.com</p>
-              <p>info@alenco.in</p>
+              <p>alencou9@gmail.com</p>
             </div>
           </div>
         </div>
