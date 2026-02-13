@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getCategoryBySlug, getSubcategoriesByCategory } from '@/lib/payload'
+import { getCategoryBySlug, getSubcategoriesByCategory, getProductsByCategory } from '@/lib/payload'
 import type { Media, Subcategory } from '@/payload-types'
 import Breadcrumb from '@/components/Breadcrumb'
+import ProductsGrid from '@/components/ProductsGrid/ProductsGrid'
 import '../products.scss'
 
 interface PageProps {
@@ -25,6 +26,7 @@ export default async function CategoryPage({ params }: PageProps) {
   }
 
   const subcategories = await getSubcategoriesByCategory(category.id)
+  const products = subcategories.length === 0 ? await getProductsByCategory(category.id) : []
   const categoryImage = getImageUrl(category.bannerImage as Media) || getImageUrl(category.image as Media)
 
   return (
@@ -70,71 +72,84 @@ export default async function CategoryPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* Subcategories Grid */}
+      {/* Subcategories or Products Grid */}
       <section className="products-grid">
         <div className="products-grid__container">
-          <div className="products-grid__header">
-            <h2 className="products-grid__title">Product Series</h2>
-            <span className="products-grid__count">{subcategories.length} series</span>
-          </div>
-
           {subcategories.length > 0 ? (
-            <div className="products-grid__grid">
-              {subcategories.map((subcategory: Subcategory) => {
-                const imageUrl = getImageUrl(subcategory.image as Media)
-                return (
-                  <Link
-                    href={`/products/${categorySlug}/${subcategory.slug}`}
-                    key={subcategory.id}
-                    className="product-card"
-                  >
-                    <div className="product-card__image">
-                      {imageUrl ? (
-                        <Image
-                          src={imageUrl}
-                          alt={subcategory.name}
-                          fill
-                          style={{ objectFit: 'cover' }}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)' }} />
-                      )}
-                    </div>
-                    <div className="product-card__content">
-                      <h3 className="product-card__name">{subcategory.name}</h3>
-                      {subcategory.shortDescription && (
-                        <p className="product-card__description">{subcategory.shortDescription}</p>
-                      )}
-                    </div>
-                    <div className="product-card__footer">
-                      <span className="product-card__link">
-                        View Products
-                        <svg className="product-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                          <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </span>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
-          ) : (
-            <div className="empty-state">
-              <div className="empty-state__icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                  <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
+            <>
+              <div className="products-grid__header">
+                <h2 className="products-grid__title">Product Series</h2>
+                <span className="products-grid__count">{subcategories.length} series</span>
               </div>
-              <h3 className="empty-state__title">No products yet</h3>
-              <p className="empty-state__text">Check back soon for new products in this category.</p>
-              <Link href="/" className="empty-state__link">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M13 8H3M3 8L8 3M3 8L8 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Back to Home
-              </Link>
-            </div>
+              <div className="products-grid__grid">
+                {subcategories.map((subcategory: Subcategory) => {
+                  const imageUrl = getImageUrl(subcategory.image as Media)
+                  return (
+                    <Link
+                      href={`/products/${categorySlug}/${subcategory.slug}`}
+                      key={subcategory.id}
+                      className="product-card"
+                    >
+                      <div className="product-card__image">
+                        {imageUrl ? (
+                          <Image
+                            src={imageUrl}
+                            alt={subcategory.name}
+                            fill
+                            style={{ objectFit: 'cover' }}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        ) : (
+                          <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)' }} />
+                        )}
+                      </div>
+                      <div className="product-card__content">
+                        <h3 className="product-card__name">{subcategory.name}</h3>
+                        {subcategory.shortDescription && (
+                          <p className="product-card__description">{subcategory.shortDescription}</p>
+                        )}
+                      </div>
+                      <div className="product-card__footer">
+                        <span className="product-card__link">
+                          View Products
+                          <svg className="product-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            </>
+          ) : products.length > 0 ? (
+            <ProductsGrid
+              products={products}
+              title="Products"
+              showCount={true}
+            />
+          ) : (
+            <>
+              <div className="products-grid__header">
+                <h2 className="products-grid__title">Products</h2>
+                <span className="products-grid__count">0 products</span>
+              </div>
+              <div className="empty-state">
+                <div className="empty-state__icon">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <h3 className="empty-state__title">No products yet</h3>
+                <p className="empty-state__text">Check back soon for new products in this category.</p>
+                <Link href="/" className="empty-state__link">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M13 8H3M3 8L8 3M3 8L8 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  Back to Home
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </section>

@@ -78,7 +78,10 @@ export default function ProductDetailPage({ params }: PageProps) {
             </div>
             <h3 className="empty-state__title">Product not found</h3>
             <p className="empty-state__text">The product you&apos;re looking for doesn&apos;t exist.</p>
-            <Link href={`/products/${categorySlug}/${subcategorySlug}`} className="empty-state__link">
+            <Link
+              href={subcategorySlug === '__direct__' ? `/products/${categorySlug}` : `/products/${categorySlug}/${subcategorySlug}`}
+              className="empty-state__link"
+            >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M13 8H3M3 8L8 3M3 8L8 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -90,8 +93,12 @@ export default function ProductDetailPage({ params }: PageProps) {
     )
   }
 
-  const subcategory = product.subcategory as Subcategory | undefined
-  const category = subcategory?.category as Category | undefined
+  // Handle both direct category products and subcategory products
+  const isDirectProduct = subcategorySlug === '__direct__'
+  const subcategory = !isDirectProduct ? (product.subcategory as Subcategory | undefined) : undefined
+  const category = isDirectProduct
+    ? (product.category as Category | undefined)
+    : (subcategory?.category as Category | undefined)
   const categoryName = category?.name || 'Products'
   const subcategoryName = subcategory?.name || 'Products'
 
@@ -111,12 +118,20 @@ export default function ProductDetailPage({ params }: PageProps) {
 
       {/* Breadcrumb */}
       <Breadcrumb
-        items={[
-          { label: 'Products', href: '/#hardware-products' },
-          { label: categoryName, href: `/products/${categorySlug}` },
-          { label: subcategoryName, href: `/products/${categorySlug}/${subcategorySlug}` },
-          { label: product.name }
-        ]}
+        items={
+          isDirectProduct
+            ? [
+                { label: 'Products', href: '/#hardware-products' },
+                { label: categoryName, href: `/products/${categorySlug}` },
+                { label: product.name }
+              ]
+            : [
+                { label: 'Products', href: '/#hardware-products' },
+                { label: categoryName, href: `/products/${categorySlug}` },
+                { label: subcategoryName, href: `/products/${categorySlug}/${subcategorySlug}` },
+                { label: product.name }
+              ]
+        }
       />
 
       {/* Product Detail */}
@@ -292,9 +307,18 @@ export default function ProductDetailPage({ params }: PageProps) {
                 const relatedImage = related.images && related.images.length > 0
                   ? getImageUrl(related.images[0].image as Media)
                   : ''
+
+                // Build correct URL based on whether related product is under category or subcategory
+                const relatedSubcategory = related.subcategory as Subcategory | undefined
+                const relatedCategory = related.category as Category | undefined
+                const relatedCategorySlug = relatedCategory?.slug || (relatedSubcategory?.category as Category)?.slug || categorySlug
+                const relatedUrl = relatedSubcategory
+                  ? `/products/${relatedCategorySlug}/${relatedSubcategory.slug}/${related.slug}`
+                  : `/products/${relatedCategorySlug}/__direct__/${related.slug}`
+
                 return (
                   <Link
-                    href={`/products/${categorySlug}/${subcategorySlug}/${related.slug}`}
+                    href={relatedUrl}
                     key={related.id}
                     className="product-card"
                   >

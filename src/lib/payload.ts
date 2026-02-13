@@ -96,6 +96,21 @@ export async function getProductsBySubcategory(subcategoryId: string | number) {
   return products.docs
 }
 
+export async function getProductsByCategory(categoryId: string | number) {
+  const payload = await getPayloadClient()
+  const products = await payload.find({
+    collection: 'products',
+    where: {
+      category: {
+        equals: categoryId,
+      },
+    },
+    sort: 'order',
+    depth: 2,
+  })
+  return products.docs
+}
+
 export async function getProductBySlug(slug: string) {
   const payload = await getPayloadClient()
   const products = await payload.find({
