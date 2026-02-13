@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Category, Subcategory } from '@/payload-types'
 import './Header.scss'
 import logoSrc from '../images/logo.png'
 
@@ -23,34 +24,58 @@ interface NavItem {
   dropdown?: DropdownItem[]
 }
 
-const navItems: NavItem[] = [
-  { label: 'HOME', href: '/' },
-  {
-    label: 'ABOUT US',
-    href: '/about',
-    dropdown: [{ label: 'Certificates', href: '/certificates' }],
-  },
-  {
-    label: 'PRODUCTS',
-    href: '/products',
-    dropdown: [
-      { label: 'Aluminium Window & Door Hardware', href: '#' },
-      { label: 'Aluminium Sliding Folding System', href: '#' },
-      { label: 'uPVC Window and Door Hardware', href: '#' },
-      { label: 'Fabrication Machinery', href: '#' },
-      { label: 'Tool & Die Development', href: '#' },
-      { label: 'Customize Product Development', href: '#' },
-      { label: 'Aluminum Window Roller', href: '#' },
-      { label: 'Aluminum Window Lock', href: '#' },
-      { label: 'Metro Handle Supplier', href: '#' },
-    ],
-  },
-  { label: 'SERVICES', href: '/services' },
-  { label: 'PROJECTS', href: '/projects' },
-  { label: 'BECOME A DISTRIBUTOR', href: '/distributor' },
-]
+interface CategoryWithSubs extends Category {
+  subcategories?: Subcategory[]
+}
 
-export default function Header() {
+interface HeaderProps {
+  categories?: CategoryWithSubs[]
+}
+
+export default function Header({ categories = [] }: HeaderProps) {
+  // Build navigation items dynamically
+  const navItems: NavItem[] = useMemo(() => {
+    const staticItems: NavItem[] = [
+      { label: 'HOME', href: '/' },
+      {
+        label: 'ABOUT US',
+        href: '/about',
+        dropdown: [{ label: 'Certificates', href: '/certificates' }],
+      },
+    ]
+
+    // Build Products dropdown from categories
+    const productsDropdown: DropdownItem[] = categories.map((category) => {
+      const categoryItem: DropdownItem = {
+        label: category.name,
+        href: `/products/${category.slug}`,
+      }
+
+      // If category has subcategories, add them as submenu
+      if (category.subcategories && category.subcategories.length > 0) {
+        categoryItem.submenu = category.subcategories.map((sub) => ({
+          label: sub.name,
+          href: `/products/${category.slug}/${sub.slug}`,
+        }))
+      }
+
+      return categoryItem
+    })
+
+    const productsItem: NavItem = {
+      label: 'PRODUCTS',
+      href: '/products',
+      dropdown: productsDropdown.length > 0 ? productsDropdown : undefined,
+    }
+
+    return [
+      ...staticItems,
+      productsItem,
+      { label: 'SERVICES', href: '/services' },
+      { label: 'PROJECTS', href: '/projects' },
+      { label: 'BECOME A DISTRIBUTOR', href: '/distributor' },
+    ]
+  }, [categories])
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null)
@@ -84,13 +109,30 @@ export default function Header() {
                     }`}
                   >
                     {item.dropdown.map((d) => (
-                      <Link
-                        key={d.label}
-                        href={d.href}
-                        className="dropdown-item"
-                      >
-                        {d.label}
-                      </Link>
+                      <div key={d.label} className="dropdown-item-wrapper">
+                        <Link
+                          href={d.href}
+                          className="dropdown-item"
+                        >
+                          {d.label}
+                          {d.submenu && d.submenu.length > 0 && (
+                            <span className="dropdown-arrow">›</span>
+                          )}
+                        </Link>
+                        {d.submenu && d.submenu.length > 0 && (
+                          <div className="dropdown-submenu">
+                            {d.submenu.map((sub) => (
+                              <Link
+                                key={sub.label}
+                                href={sub.href}
+                                className="dropdown-subitem"
+                              >
+                                {sub.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}
@@ -140,13 +182,45 @@ export default function Header() {
                   {mobileDropdown === item.label && (
                     <div className="drawer-submenu">
                       {item.dropdown.map((sub) => (
-                        <Link
-                          key={sub.label}
-                          href={sub.href}
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          {sub.label}
-                        </Link>
+                        <div key={sub.label} className="drawer-subitem-wrapper">
+                          {sub.submenu && sub.submenu.length > 0 ? (
+                            <>
+                              <button
+                                className="drawer-sublink"
+                                onClick={() =>
+                                  setMobileDropdown(
+                                    mobileDropdown === sub.label ? item.label : sub.label
+                                  )
+                                }
+                              >
+                                {sub.label}
+                                <span>›</span>
+                              </button>
+                              {mobileDropdown === sub.label && (
+                                <div className="drawer-nested-submenu">
+                                  {sub.submenu.map((nested) => (
+                                    <Link
+                                      key={nested.label}
+                                      href={nested.href}
+                                      onClick={() => setMobileOpen(false)}
+                                      className="drawer-nested-link"
+                                    >
+                                      {nested.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
+                            </>
+                          ) : (
+                            <Link
+                              href={sub.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="drawer-sublink"
+                            >
+                              {sub.label}
+                            </Link>
+                          )}
+                        </div>
                       ))}
                     </div>
                   )}

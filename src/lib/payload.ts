@@ -158,3 +158,26 @@ export async function getFeaturedProducts() {
   })
   return products.docs
 }
+
+export async function getCategoriesWithSubcategories() {
+  const payload = await getPayloadClient()
+  const categories = await payload.find({
+    collection: 'categories',
+    sort: 'order',
+    depth: 0,
+    limit: 100,
+  })
+
+  // For each category, fetch its subcategories
+  const categoriesWithSubs = await Promise.all(
+    categories.docs.map(async (category) => {
+      const subcategories = await getSubcategoriesByCategory(category.id)
+      return {
+        ...category,
+        subcategories,
+      }
+    })
+  )
+
+  return categoriesWithSubs
+}
