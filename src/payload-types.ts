@@ -385,9 +385,13 @@ export interface Product {
    */
   productCode: string;
   /**
-   * The subcategory this product belongs to
+   * Select if this product belongs directly to a category (without subcategory)
    */
-  subcategory: string | Subcategory;
+  category?: (string | null) | Category;
+  /**
+   * Select if this product belongs to a subcategory
+   */
+  subcategory?: (string | null) | Subcategory;
   /**
    * Optional grouping within the subcategory (e.g., ALENCO MULTI LOCKING)
    */
@@ -764,6 +768,7 @@ export interface ProductsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   productCode?: T;
+  category?: T;
   subcategory?: T;
   productGroup?: T;
   images?:

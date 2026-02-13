@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -6,6 +6,7 @@ import {
   getSubcategoryBySlug,
   getProductsBySubcategory,
   getProductGroupsBySubcategory,
+  getProductBySlug,
 } from '@/lib/payload'
 import type { Media, Product, ProductGroup, Category } from '@/payload-types'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -31,7 +32,23 @@ export default async function SubcategoryPage({ params }: PageProps) {
     getSubcategoryBySlug(subcategorySlug),
   ])
 
-  if (!category || !subcategory) {
+  // If subcategory doesn't exist, check if it's a direct product under the category
+  if (!subcategory) {
+    const product = await getProductBySlug(subcategorySlug)
+
+    if (product) {
+      // Check if this product belongs directly to this category
+      const productCategory = typeof product.category === 'object' ? product.category : null
+      if (productCategory && productCategory.slug === categorySlug) {
+        // Redirect to product detail page with special "__direct__" subcategory
+        redirect(`/products/${categorySlug}/__direct__/${subcategorySlug}`)
+      }
+    }
+
+    notFound()
+  }
+
+  if (!category) {
     notFound()
   }
 
