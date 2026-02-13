@@ -27,7 +27,8 @@ export async function getAllCategories() {
     collection: 'categories',
     sort: 'order',
     depth: 1,
-    limit: 100,
+    limit: 1000, // Increased limit to fetch all categories
+    pagination: false,
   })
   return categories.docs
 }
@@ -57,6 +58,8 @@ export async function getSubcategoriesByCategory(categoryId: string | number) {
     },
     sort: 'order',
     depth: 2,
+    limit: 1000, // Increased limit to fetch all subcategories
+    pagination: false,
   })
   return subcategories.docs
 }
@@ -92,6 +95,8 @@ export async function getProductsBySubcategory(subcategoryId: string | number) {
     },
     sort: 'order',
     depth: 2,
+    limit: 1000, // Increased limit to fetch all products
+    pagination: false,
   })
   return products.docs
 }
@@ -107,6 +112,8 @@ export async function getProductsByCategory(categoryId: string | number) {
     },
     sort: 'order',
     depth: 2,
+    limit: 1000, // Increased limit to fetch all products
+    pagination: false,
   })
   return products.docs
 }
@@ -136,6 +143,8 @@ export async function getProductGroupsBySubcategory(subcategoryId: string | numb
     },
     sort: 'order',
     depth: 1,
+    limit: 1000, // Increased limit to fetch all product groups
+    pagination: false,
   })
   return groups.docs
 }
@@ -165,7 +174,8 @@ export async function getCategoriesWithSubcategories() {
     collection: 'categories',
     sort: 'order',
     depth: 0,
-    limit: 100,
+    limit: 1000, // Increased limit to fetch all categories
+    pagination: false,
   })
 
   // For each category, fetch its subcategories
