@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '@/components/Header'
+import HeaderWrapper from '@/components/HeaderWrapper'
 import './styles.css'
 import Footer from '@/components/Footer'
 
@@ -14,7 +14,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Header />
+        <HeaderWrapper />
         <main>{children}</main>
         <Footer />
       </body>
