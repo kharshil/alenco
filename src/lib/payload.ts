@@ -27,8 +27,9 @@ export async function getAllCategories() {
     collection: 'categories',
     sort: 'order',
     depth: 1,
-    limit: 100,
+    limit: 10000, // Very high limit to fetch all categories
   })
+  console.log(`[getAllCategories] Fetched ${categories.docs.length} categories`)
   return categories.docs
 }
 
@@ -57,6 +58,7 @@ export async function getSubcategoriesByCategory(categoryId: string | number) {
     },
     sort: 'order',
     depth: 2,
+    limit: 10000, // Very high limit to fetch all subcategories
   })
   return subcategories.docs
 }
@@ -92,6 +94,7 @@ export async function getProductsBySubcategory(subcategoryId: string | number) {
     },
     sort: 'order',
     depth: 2,
+    limit: 10000, // Very high limit to fetch all products
   })
   return products.docs
 }
@@ -107,6 +110,7 @@ export async function getProductsByCategory(categoryId: string | number) {
     },
     sort: 'order',
     depth: 2,
+    limit: 10000, // Very high limit to fetch all products
   })
   return products.docs
 }
@@ -136,6 +140,7 @@ export async function getProductGroupsBySubcategory(subcategoryId: string | numb
     },
     sort: 'order',
     depth: 1,
+    limit: 10000, // Very high limit to fetch all product groups
   })
   return groups.docs
 }
@@ -165,8 +170,10 @@ export async function getCategoriesWithSubcategories() {
     collection: 'categories',
     sort: 'order',
     depth: 0,
-    limit: 100,
+    limit: 10000, // Very high limit to fetch all categories
   })
+
+  console.log(`[getCategoriesWithSubcategories] Fetched ${categories.docs.length} categories`)
 
   // For each category, fetch its subcategories
   const categoriesWithSubs = await Promise.all(

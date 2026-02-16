@@ -11,6 +11,7 @@ export default async function HeaderWrapper() {
 
   try {
     categories = await getCategoriesWithSubcategories()
+    console.log(`[HeaderWrapper] Loaded ${categories.length} categories for navigation:`, categories.map(c => c.name))
   } catch (error) {
     console.error('Failed to fetch categories for navigation:', error)
   }
