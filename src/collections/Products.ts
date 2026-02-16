@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -125,6 +126,12 @@ export const Products: CollectionConfig = {
       name: 'description',
       type: 'richText',
       label: 'Product Description',
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          // Tables are now enabled by default in lexical editor
+        ],
+      }),
     },
     {
       name: 'shortDescription',
