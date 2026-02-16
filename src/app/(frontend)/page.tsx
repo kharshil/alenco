@@ -11,6 +11,9 @@ import FeaturesSection from '@/components/FeaturesSection'
 import ProjectsSection from '@/components/ProjectsSection'
 import ClientsSection from '@/components/ClientsSection'
 
+// Force dynamic rendering - always fetch fresh category data from database
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   return (
     <div className="front-page">
