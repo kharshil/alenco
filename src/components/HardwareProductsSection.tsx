@@ -47,6 +47,7 @@ export default async function HardwareProductsSection() {
 
   try {
     categories = await getAllCategories()
+    console.log(`[HardwareProductsSection] Displaying ${categories.length} categories:`, categories.map(c => c.name))
   } catch (error) {
     console.error('Failed to fetch categories:', error)
   }
