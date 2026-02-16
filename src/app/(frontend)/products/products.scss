@@ -241,7 +241,7 @@ $border-light: #e5e7eb;
 
 .product-card__image {
   position: relative;
-  aspect-ratio: 16/9;
+  aspect-ratio: 1/1;
   overflow: hidden;
   background: linear-gradient(135deg, rgba($primary-green, 0.05) 0%, rgba($primary-green-light, 0.1) 100%);
 }
