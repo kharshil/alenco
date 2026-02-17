@@ -1,11 +1,12 @@
 import React from 'react'
 import HeaderWrapper from '@/components/HeaderWrapper'
+import PageLoader from '@/components/PageLoader/PageLoader'
 import './styles.css'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Premium hardware solutions for windows and doors.',
+  title: 'Alenco | Hardware Products',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -14,6 +15,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <PageLoader />
         <HeaderWrapper />
         <main>{children}</main>
         <Footer />

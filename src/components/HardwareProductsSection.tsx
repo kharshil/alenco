@@ -85,7 +85,7 @@ export default async function HardwareProductsSection() {
                       <div className="product-card__visual">
                         {imageUrl ? (
                           <Image
-                            className="product-card__image"
+                            className="product-card__img"
                             src={imageUrl}
                             alt={category.name}
                             fill
