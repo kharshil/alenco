@@ -43,42 +43,27 @@
 
     .dropdown {
       position: absolute;
-      top: 100%;
-      left: 0;
+      top: calc(100% + 8px);
+      left: -12px;
       background: #fff;
-      min-width: 240px;
-      max-width: 800px;
-      padding: 16px;
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-8px);
-      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 4px;
-      max-height: 85vh;
-      overflow-y: auto;
-
-      /* Custom scrollbar */
-      &::-webkit-scrollbar {
-        width: 6px;
-      }
-
-      &::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: #2bb249;
-        border-radius: 4px;
-
-        &:hover {
-          background: #239439;
-        }
-      }
+      transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+      /* Stack items vertically then wrap into new column */
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      max-height: 380px;
+      width: max-content;
+      min-width: 200px;
+      max-width: min(660px, calc(100vw - 40px));
+      gap: 1px;
+      z-index: 1001;
 
       &.active {
         opacity: 1;
@@ -88,25 +73,26 @@
 
       .dropdown-item-wrapper {
         position: relative;
+        flex: 0 0 auto;
 
         .dropdown-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 10px 16px;
-          font-size: 14px;
+          padding: 9px 14px;
+          font-size: 13px;
           text-decoration: none;
           color: #333;
           border-radius: 6px;
-          transition: all 0.2s ease;
+          transition: background 0.15s ease, color 0.15s ease;
           white-space: nowrap;
           font-weight: 500;
+          width: 210px;
 
           .dropdown-arrow {
             margin-left: 8px;
-            font-size: 16px;
-            opacity: 0.6;
-            transition: opacity 0.2s ease;
+            font-size: 15px;
+            opacity: 0.5;
           }
 
           &:hover {
