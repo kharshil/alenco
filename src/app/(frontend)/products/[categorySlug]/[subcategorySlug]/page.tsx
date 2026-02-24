@@ -111,7 +111,7 @@ export default async function SubcategoryPage({ params }: PageProps) {
                   src={subcategoryImage}
                   alt={subcategory.name}
                   fill
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: 'contain' }}
                   sizes="(max-width: 768px) 100vw, 400px"
                 />
               </div>
@@ -136,7 +136,7 @@ export default async function SubcategoryPage({ params }: PageProps) {
               products={groupProducts}
               allProducts={products}
             />
-          ) : null
+          ) : null,
         )}
 
       {/* Ungrouped Products / All Products */}

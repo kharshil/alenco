@@ -36,13 +36,13 @@ export default function HeroSlider() {
           'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=2400&q=80',
         accent: '#27ae60',
       },
-      {
-        title: 'Fabrication Machinery',
-        subtitle: 'Reliable tools for consistent output',
-        imageSrc:
-          'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2400&q=80',
-        accent: '#27ae60',
-      },
+      // {
+      //   title: 'Fabrication Machinery',
+      //   subtitle: 'Reliable tools for consistent output',
+      //   imageSrc:
+      //     'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2400&q=80',
+      //   accent: '#27ae60',
+      // },
       {
         title: 'uPVC Hardware Range',
         subtitle: 'Built for performance and longevity',
@@ -141,12 +141,15 @@ export default function HeroSlider() {
                 </div>
                 <h2 className="hero-slider__title">
                   <span className="title-word">{slide.title.split(' ')[0]}</span>
-                  {slide.title.split(' ').slice(1).map((word, i) => (
-                    <span key={i} className="title-word">
-                      {' '}
-                      {word}
-                    </span>
-                  ))}
+                  {slide.title
+                    .split(' ')
+                    .slice(1)
+                    .map((word, i) => (
+                      <span key={i} className="title-word">
+                        {' '}
+                        {word}
+                      </span>
+                    ))}
                 </h2>
                 {slide.subtitle && (
                   <p className="hero-slider__subtitle">
