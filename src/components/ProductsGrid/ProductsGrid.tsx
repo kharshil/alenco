@@ -53,9 +53,7 @@ export default function ProductsGrid({ products, title, showCount = true }: Prod
         <div className="products-grid__container">
           <div className="products-grid__header">
             <h2 className="products-grid__title">{title || 'Products'}</h2>
-            {showCount && (
-              <span className="products-grid__count">{products.length} products</span>
-            )}
+            {showCount && <span className="products-grid__count">{products.length} products</span>}
           </div>
 
           <div className="products-grid__grid">
@@ -74,7 +72,7 @@ export default function ProductsGrid({ products, title, showCount = true }: Prod
                         src={imageUrl}
                         alt={product.name}
                         fill
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'contain' }}
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     ) : (

@@ -68,7 +68,7 @@ export default function ProductGroupGrid({ group, products, allProducts }: Produ
                         src={imageUrl}
                         alt={product.name}
                         fill
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'contain' }}
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     ) : (
