@@ -25,42 +25,42 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   projects = [
     {
       id: 1,
-      title: "9 Square Ahmedabad",
+      title: "Titan Business Park – Ahmedabad",
       location: "Ahmedabad",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
       category: "Commercial"
     },
     {
       id: 2,
-      title: "9-Square Rajkot",
+      title: "Shivay Heights – Rajkot",
       location: "Rajkot",
       image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80",
       category: "Residential"
     },
     {
       id: 3,
-      title: "Ahuja Mumbai",
+      title: "Skyline Crest – Mumbai",
       location: "Mumbai",
       image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80",
       category: "High-rise"
     },
     {
       id: 4,
-      title: "Emerald Club Rajkot",
+      title: "Saffron Valley Retreat – Rajkot",
       location: "Rajkot",
       image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80",
       category: "Resort"
     },
     {
       id: 5,
-      title: "Ganesh Glory Ahmedabad",
+      title: "Orion Corporate Tower – Ahmedabad",
       location: "Ahmedabad",
       image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&q=80",
       category: "Commercial"
     },
     {
       id: 6,
-      title: "Halcyon Ahmedabad",
+      title: "Harmony Residency – Ahmedabad",
       location: "Ahmedabad",
       image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80",
       category: "Residential"
