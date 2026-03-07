@@ -25,7 +25,7 @@ export default async function HomePage() {
       <AboutSection />
       <ServicesSection />
       <FeaturesSection />
-      <ProjectsSection />
+      {/* <ProjectsSection /> */}
       <ClientsSection />
     </div>
   )
