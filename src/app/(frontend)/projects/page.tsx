@@ -7,9 +7,8 @@ import Breadcrumb from '@/components/Breadcrumb'
 export default function ProjectsPage() {
   return (
     <main className="about-page">
-      {/* Hero */}
-      <section className="about-hero">
-        <div className="overlay">
+      <section className="distributor-hero">
+        <div className="hero-content">
           <h1>Projects</h1>
         </div>
       </section>

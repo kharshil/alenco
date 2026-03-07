@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -8,11 +9,25 @@ export const Products: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'productCode', 'subcategory', 'productGroup', 'order'],
+    defaultColumns: ['name', 'productCode', 'category', 'subcategory', 'productGroup', 'order'],
     group: 'Products',
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        // Ensure either category or subcategory is provided, but not both
+        if (data?.category && data?.subcategory) {
+          throw new Error('Product cannot belong to both a category and subcategory. Please select only one.')
+        }
+        if (!data?.category && !data?.subcategory) {
+          throw new Error('Product must belong to either a category or subcategory.')
+        }
+        return data
+      },
+    ],
   },
   fields: [
     {
@@ -56,13 +71,23 @@ export const Products: CollectionConfig = {
       },
     },
     {
+      name: 'category',
+      type: 'relationship',
+      relationTo: 'categories',
+      label: 'Category',
+      admin: {
+        description: 'Select if this product belongs directly to a category (without subcategory)',
+        condition: (data) => !data?.subcategory,
+      },
+    },
+    {
       name: 'subcategory',
       type: 'relationship',
       relationTo: 'subcategories',
-      required: true,
       label: 'Subcategory',
       admin: {
-        description: 'The subcategory this product belongs to',
+        description: 'Select if this product belongs to a subcategory',
+        condition: (data) => !data?.category,
       },
     },
     {
@@ -101,6 +126,12 @@ export const Products: CollectionConfig = {
       name: 'description',
       type: 'richText',
       label: 'Product Description',
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          // Tables are now enabled by default in lexical editor
+        ],
+      }),
     },
     {
       name: 'shortDescription',

@@ -78,7 +78,7 @@ export const Categories: CollectionConfig = {
     {
       name: 'featured',
       type: 'checkbox',
-      defaultValue: false,
+      defaultValue: true,
       label: 'Featured on Homepage',
       admin: {
         description: 'Show this category on the homepage',

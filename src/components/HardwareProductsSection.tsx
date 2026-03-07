@@ -47,6 +47,7 @@ export default async function HardwareProductsSection() {
 
   try {
     categories = await getAllCategories()
+    console.log(`[HardwareProductsSection] Displaying ${categories.length} categories:`, categories.map(c => c.name))
   } catch (error) {
     console.error('Failed to fetch categories:', error)
   }
@@ -84,7 +85,7 @@ export default async function HardwareProductsSection() {
                       <div className="product-card__visual">
                         {imageUrl ? (
                           <Image
-                            className="product-card__image"
+                            className="product-card__img"
                             src={imageUrl}
                             alt={category.name}
                             fill
